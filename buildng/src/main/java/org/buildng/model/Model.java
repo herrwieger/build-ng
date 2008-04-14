@@ -14,12 +14,16 @@ import org.apache.log4j.Logger;
 
 public class Model {
     //--------------------------------------------------------------------------  
-    // class variables
+    // constants
     //--------------------------------------------------------------------------
-
+    
     private static final String HEADER = "----------------------------------------";
 
-
+    
+    
+    //--------------------------------------------------------------------------  
+    // class variables
+    //--------------------------------------------------------------------------
 
     private static final Logger LOG = Logger.getLogger(Model.class);
 
@@ -48,26 +52,20 @@ public class Model {
 
 
     // --------------------------------------------------------------------------
-    // accessor methods
+    // fluent builder methods
     // --------------------------------------------------------------------------
 
-    public void setRepositoryDir(String pRepositoryDir) {
+    public Model repositoryDir(String pRepositoryDir) {
         fRepositoryDir = new File(pRepositoryDir);
+        
+        return this;
     }
     
-    public File getRepositoryDir() {
-        return fRepositoryDir;
-    }
-    
-    public void putDefaultBuilderForPhase(Builder pBuilder, Phase pPhase) {
+    public Model putDefaultBuilderForPhase(Builder pBuilder, Phase pPhase) {
         fDefaultBuildersByPhase.put(pPhase, pBuilder);
+        
+        return this;
     }
-
-
-
-    // --------------------------------------------------------------------------
-    // builder methods
-    // --------------------------------------------------------------------------
 
     public Project createProject(String pName) {
         Project project = new Project(pName, new File(fBaseDir, pName), fDefaultBuildersByPhase);
@@ -75,6 +73,16 @@ public class Model {
         return project;
     }
 
+
+    
+    //--------------------------------------------------------------------------  
+    // accessor methods
+    //--------------------------------------------------------------------------
+
+    public File getRepositoryDir() {
+        return fRepositoryDir;
+    }
+    
 
 
     // --------------------------------------------------------------------------

@@ -35,34 +35,47 @@ public class TestModel {
     @BeforeClass
     public void setUp() {
         fModel = createModel();
-        CompilerConfiguration compilerConfig = new CompilerConfiguration("target/classes", "target/test-classes");
-        compilerConfig.setSourceFolders("src/main/java");
-        compilerConfig.setTestSourceFolders("src/test/java");
+
+        CompilerConfiguration compilerConfig =
+            new CompilerConfiguration("target/classes", "target/test-classes")
+                    .sourceFolders("src/main/java")
+                    .testSourceFolders("src/test/java");
         fModel.putDefaultBuilderForPhase(new Cleaner("target"), Phase.CLEAN);
-        ResourceCopier copier = new ResourceCopier(compilerConfig);
-        copier.setSourceFolders("src/main/resources");
-        copier.setTestSourceFolders("src/test/resources");
+        
+        ResourceCopier copier =
+            new ResourceCopier(compilerConfig)
+                .sourceFolders("src/main/resources")
+                .testSourceFolders("src/test/resources");
         Compiler compiler = new Compiler(compilerConfig);
         fModel.putDefaultBuilderForPhase(new CompositeBuilder(copier, compiler), Phase.COMPILE);
+        
         fModel.putDefaultBuilderForPhase(new JunitTester(compilerConfig, "target/test"), Phase.TEST);
+        
         fModel.putDefaultBuilderForPhase(new JarPackager(compilerConfig, "target"), Phase.PACKAGE);
-        JavadocBuilder javadocBuilder = new JavadocBuilder(compilerConfig, "target/site/javadoc", "target/site/testjavadoc");
-        JunitReporter junitReporter = new JunitReporter("target/test", "target/site/test");
+        
+        JavadocBuilder javadocBuilder = new JavadocBuilder(compilerConfig, "target/site/javadoc",
+                                                "target/site/testjavadoc");
+        JunitReporter  junitReporter  = new JunitReporter("target/test", "target/site/test");
         fModel.putDefaultBuilderForPhase(new CompositeBuilder(javadocBuilder, junitReporter), Phase.SITE);
 
-        Project applicationProject = fModel.createProject("application");
-        applicationProject.addDependency("junit", "junit", "4.4", LibraryScope.TEST);
+        
+        Project applicationProject =
+            fModel.createProject("application")
+                .addDependency("junit", "junit", "4.4", LibraryScope.TEST);
 
-        Project domainProject = fModel.createProject("domain");
-        domainProject.addDependency("junit", "junit", "3.8.1", LibraryScope.TEST);
-        domainProject.addDependency("commons-lang", "commons-lang", "2.3");
-        domainProject.addDependency("log4j", "log4j", "1.2.14");
+        Project domainProject =
+            fModel.createProject("domain")
+                .addDependency("junit", "junit", "3.8.1", LibraryScope.TEST)
+                .addDependency("commons-lang", "commons-lang", "2.3")
+                .addDependency("log4j", "log4j", "1.2.14");
 
-        Project moneyProject = fModel.createProject("money");
-        moneyProject.addDependency("junit", "junit", "3.8.1", LibraryScope.TEST);
+        Project moneyProject =
+            fModel.createProject("money")
+                .addDependency("junit", "junit", "3.8.1", LibraryScope.TEST);
 
-        applicationProject.addDependency(domainProject);
-        applicationProject.addDependency(moneyProject);
+        applicationProject
+            .addDependency(domainProject)
+            .addDependency(moneyProject);
     }
 
     // --------------------------------------------------------------------------
@@ -71,7 +84,7 @@ public class TestModel {
 
     private Model createModel() {
         Model model = new Model("C:/Work/Home/build_systems/trunk");
-        model.setRepositoryDir("C:/Library/Java");
+        model.repositoryDir("C:/Library/Java");
         
         return model;
     }
