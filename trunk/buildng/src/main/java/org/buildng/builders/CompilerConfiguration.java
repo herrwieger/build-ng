@@ -29,19 +29,28 @@ public class CompilerConfiguration implements Configuration {
 
 
     // --------------------------------------------------------------------------
-    // instance methods
+    // fluent builder methods
     // --------------------------------------------------------------------------
 
-    public void setSourceFolders(String... pSourceFolders) {
+    public CompilerConfiguration sourceFolders(String... pSourceFolders) {
         fSourceFolders = pSourceFolders;
+        
+        return this;
     }
+
+    public CompilerConfiguration testSourceFolders(String... pTestSourceFolders) {
+        fTestSourceFolders = pTestSourceFolders;
+        
+        return this;
+    }
+
+    
+    //--------------------------------------------------------------------------  
+    // accessor methods
+    //--------------------------------------------------------------------------
 
     public String[] getSourceFolders() {
         return fSourceFolders;
-    }
-
-    public void setTestSourceFolders(String... pTestSourceFolders) {
-        fTestSourceFolders = pTestSourceFolders;
     }
 
     public String[] getTestSourceFolders() {

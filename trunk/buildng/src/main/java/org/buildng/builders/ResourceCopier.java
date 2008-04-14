@@ -29,15 +29,19 @@ public class ResourceCopier implements Builder {
 
 
     // --------------------------------------------------------------------------
-    // accessor methods
+    // fluent builder methods
     // --------------------------------------------------------------------------
 
-    public void setSourceFolders(String... pSourceFolders) {
+    public ResourceCopier sourceFolders(String... pSourceFolders) {
         fSourceFolders = pSourceFolders;
+        
+        return this;
     }
 
-    public void setTestSourceFolders(String... pTestSourceFolders) {
+    public ResourceCopier testSourceFolders(String... pTestSourceFolders) {
         fTestSourceFolders = pTestSourceFolders;
+        
+        return this;
     }
 
 

@@ -37,29 +37,45 @@ public class Project {
 
 
     // --------------------------------------------------------------------------
-    // instance methods
+    // fluent builder methods
     // --------------------------------------------------------------------------
 
-    public void addDependency(Project pProject) {
+    public Project addDependency(Project pProject) {
         fProjectDependencies.add(pProject);
+        
+        return this;
     }
 
-    public void addDependency(String pGroupId, String pName, String pVersion) {
+    public Project addDependency(String pGroupId, String pName, String pVersion) {
         addDependency(pGroupId, pName, pVersion, LibraryScope.COMPILE);
+        
+        return this;
     }
 
-    public void addDependency(String pGroupId, String pName, String pVersion, String pExtension) {
+    public Project addDependency(String pGroupId, String pName, String pVersion, String pExtension) {
         addDependency(pGroupId, pName, pVersion, pExtension, LibraryScope.COMPILE);
+        
+        return this;
     }
 
-    public void addDependency(String pGroupId, String pName, String pVersion, LibraryScope pScope) {
+    public Project addDependency(String pGroupId, String pName, String pVersion, LibraryScope pScope) {
         addDependency(pGroupId, pName, pVersion, "jar", pScope);
+        
+        return this;
     }
 
-    public void addDependency(String pGroupId, String pName, String pVersion, String pExtension, LibraryScope pScope) {
+    public Project addDependency(String pGroupId, String pName, String pVersion, String pExtension, LibraryScope pScope) {
         List<Library> dependencies = getLibraryDependencies(pScope);
         dependencies.add(new Library(pGroupId, pName, pVersion, pExtension));
+        
+        return this;
     }
+
+    
+    
+    //--------------------------------------------------------------------------  
+    // accessor methods
+    //--------------------------------------------------------------------------
 
     public List<Project> getProjectDependencies() {
         return fProjectDependencies;
