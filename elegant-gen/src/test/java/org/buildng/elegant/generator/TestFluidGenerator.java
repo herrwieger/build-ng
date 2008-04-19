@@ -2,6 +2,8 @@ package org.buildng.elegant.generator;
 
 import static org.testng.Assert.*;
 
+import java.io.File;
+
 import org.apache.tools.ant.taskdefs.optional.dotnet.NetCommand;
 import org.apache.tools.ant.taskdefs.optional.junit.JUnitTask;
 import org.apache.tools.ant.types.Mapper;
@@ -12,7 +14,7 @@ import org.testng.annotations.Test;
 @Test
 public class TestFluidGenerator {
     public void testGenerateFactory() {
-        new FluidGenerator().generateElegant();
+        new FluidGenerator().generateElegant(new File("src/main/java-gen"));
     }
 
     public void testApplicableConstructor() {

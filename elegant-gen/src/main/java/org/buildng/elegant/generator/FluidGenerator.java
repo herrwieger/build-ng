@@ -25,7 +25,6 @@ public class FluidGenerator {
     // constants
     // --------------------------------------------------------------------------
 
-    private static final String JAVA_GEN_DIR          = "src/main/java-gen/";
     private static final String ELEGANT_BUILDER       = "ElegantBuilder";
     private static final String TASK_BUILDER_SUFFIX   = "TaskBuilder";
     private static final String TYPE_BUILDER_SUFFIX   = "TypeBuilder";
@@ -57,14 +56,23 @@ public class FluidGenerator {
 
 
 
+    //--------------------------------------------------------------------------  
+    // main methods
+    //--------------------------------------------------------------------------
+
+    public static void main(String[] pArgs) {
+        new FluidGenerator().generateElegant(new File(pArgs[0]));
+    }
+    
+    
     // --------------------------------------------------------------------------
     // instance methods
     // --------------------------------------------------------------------------
 
-    public void generateElegant() {
+    public void generateElegant(File pJavaGenDir) {
         Properties defaults = getAntTaskDefaults();
         try {
-            File dir = new File(JAVA_GEN_DIR + getPathForPackage(ELEGANT_PACKAGE));
+            File dir = new File(pJavaGenDir, getPathForPackage(ELEGANT_PACKAGE));
             dir.mkdirs();
             FileWriter writer = new FileWriter(new File(dir, ELEGANT_BUILDER + ".java"));
             writer.write("package " + ELEGANT_PACKAGE + ";\n");
@@ -98,7 +106,7 @@ public class FluidGenerator {
 
                 createBuilder(taskClass, dataTypes, dir);
             }
-            createDataTypeBuilders(dataTypes, builderMethodNames, writer);
+            createDataTypeBuilders(dataTypes, builderMethodNames, writer, pJavaGenDir);
             writer.write("}\n");
             writer.close();
         } catch (IOException ex) {
@@ -261,8 +269,8 @@ public class FluidGenerator {
     }
 
     private void createDataTypeBuilders(Set<Class<?>> pDataTypes, Set<String> pBuilderMethodNames,
-            FileWriter pElegantWriter) throws IOException {
-        File dir = new File(JAVA_GEN_DIR + getPathForPackage(ELEGANT_TYPE_PACKAGE));
+            FileWriter pElegantWriter, File pJavaGenDir) throws IOException {
+        File dir = new File(pJavaGenDir, getPathForPackage(ELEGANT_TYPE_PACKAGE));
         dir.mkdirs();
 
         Set<Class<?>> discoveredTypes = new HashSet<Class<?>>(pDataTypes);
