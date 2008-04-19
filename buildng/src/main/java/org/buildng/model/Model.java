@@ -10,6 +10,15 @@ import java.util.Set;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
+import org.buildng.builders.Cleaner;
+import org.buildng.builders.Compiler;
+import org.buildng.builders.CompilerConfiguration;
+import org.buildng.builders.CompositeBuilder;
+import org.buildng.builders.JarPackager;
+import org.buildng.builders.JavadocBuilder;
+import org.buildng.builders.JunitReporter;
+import org.buildng.builders.JunitTester;
+import org.buildng.builders.ResourceCopier;
 
 
 public class Model {
@@ -37,7 +46,7 @@ public class Model {
     private File                                  fRepositoryDir;
     private List<Project>                         fProjects               = new ArrayList<Project>();
     
-    private Map<Phase, Builder>     fDefaultBuildersByPhase = new HashMap<Phase, Builder>();
+    private Map<TaskType, Builder>     fDefaultBuildersByTaskType = new HashMap<TaskType, Builder>();
 
 
 
@@ -49,6 +58,38 @@ public class Model {
         fBaseDir = new File(pBasedir);
     }
 
+    
+    //--------------------------------------------------------------------------  
+    // 
+    //--------------------------------------------------------------------------
+
+    public static Model createStandardModel(String pBaseDir, String pRepositoryDir) {
+        Model model = new Model(pBaseDir).repositoryDir(pRepositoryDir);
+        
+        CompilerConfiguration compilerConfig =
+            new CompilerConfiguration("target/classes", "target/test-classes")
+                    .sourceFolders("src/main/java")
+                    .testSourceFolders("src/test/java");
+        model.putDefaultBuilderForTaskType(new Cleaner("target"), TaskType.CLEAN);
+        
+        ResourceCopier copier =
+            new ResourceCopier(compilerConfig)
+                .sourceFolders("src/main/resources")
+                .testSourceFolders("src/test/resources");
+        Compiler compiler = new Compiler(compilerConfig);
+        model.putDefaultBuilderForTaskType(new CompositeBuilder(copier, compiler), TaskType.COMPILE);
+        
+        model.putDefaultBuilderForTaskType(new JunitTester(compilerConfig, "target/test"), TaskType.TEST);
+        
+        model.putDefaultBuilderForTaskType(new JarPackager(compilerConfig, "target"), TaskType.PACKAGE);
+        
+        JavadocBuilder javadocBuilder = new JavadocBuilder(compilerConfig, "target/site/javadoc",
+                                                "target/site/testjavadoc");
+        JunitReporter  junitReporter  = new JunitReporter("target/test", "target/site/test");
+        model.putDefaultBuilderForTaskType(new CompositeBuilder(javadocBuilder, junitReporter), TaskType.SITE);
+        
+        return model;
+    }
 
 
     // --------------------------------------------------------------------------
@@ -61,14 +102,14 @@ public class Model {
         return this;
     }
     
-    public Model putDefaultBuilderForPhase(Builder pBuilder, Phase pPhase) {
-        fDefaultBuildersByPhase.put(pPhase, pBuilder);
+    public Model putDefaultBuilderForTaskType(Builder pBuilder, TaskType pTaskType) {
+        fDefaultBuildersByTaskType.put(pTaskType, pBuilder);
         
         return this;
     }
 
     public Project createProject(String pName) {
-        Project project = new Project(pName, new File(fBaseDir, pName), fDefaultBuildersByPhase);
+        Project project = new Project(pName, new File(fBaseDir, pName), fDefaultBuildersByTaskType);
         fProjects.add(project);
         return project;
     }
@@ -89,29 +130,37 @@ public class Model {
     // build methods
     // --------------------------------------------------------------------------
 
-    public void build(Phase pPhase) {
-        Set<Project> visitedProjects = new HashSet<Project>();
-        buildProjects(pPhase, visitedProjects, fProjects);
+    public void build(TaskType ... pTaskTypes) {
+        
+        for (TaskType taskType : pTaskTypes) {
+            buildProjects(taskType);
+        }
     }
 
-    private void buildProjects(Phase pPhase, Set<Project> pVisitedProjects, List<Project> pProjects) {
+
+    private void buildProjects(TaskType taskType) {
+        Set<Project> visitedProjects = new HashSet<Project>();
+        buildProjects(taskType, visitedProjects, fProjects);
+    }
+
+    private void buildProjects(TaskType pTaskType, Set<Project> pVisitedProjects, List<Project> pProjects) {
         for (Project project : pProjects) {
             if (pVisitedProjects.contains(project)) {
                 continue;
             }
             pVisitedProjects.add(project);
-            buildProjects(pPhase, pVisitedProjects, project.getProjectDependencies());
+            buildProjects(pTaskType, pVisitedProjects, project.getProjectDependencies());
             
-            buildProject(pPhase, project);
+            buildProject(pTaskType, project);
         }
     }
     
-    private void buildProject(Phase pPhase, Project project) {
+    private void buildProject(TaskType pTaskType, Project project) {
         LOG.info(HEADER);
         LOG.info("Building project >>" + project.getName() + "<<");
         LOG.info(HEADER);
         LOG.info("");
-        project.getBuilderForPhase(pPhase).build(this, project);
+        project.getBuilderForTaskType(pTaskType).build(this, project);
         LOG.info(HEADER);
         LOG.info("");
         LOG.info("");

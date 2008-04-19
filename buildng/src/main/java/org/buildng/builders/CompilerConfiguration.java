@@ -21,6 +21,10 @@ public class CompilerConfiguration implements Configuration {
     // constructors
     // --------------------------------------------------------------------------
 
+    public CompilerConfiguration() {
+        this("target/classes", "target/test-classes");
+    }
+
     public CompilerConfiguration(String pTargetFolder, String pTestTargetFolder) {
         fTargetFolder     = pTargetFolder;
         fTestTargetFolder = pTestTargetFolder;
