@@ -1,6 +1,7 @@
 package org.buildng.model;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -98,6 +99,12 @@ public class Model {
 
     public Model repositoryDir(String pRepositoryDir) {
         fRepositoryDir = new File(pRepositoryDir);
+        
+        try {
+            LOG.debug("repositoryDir path=" + fRepositoryDir.getCanonicalPath());
+        } catch (IOException ex) {
+            // intentionally left blank. this is a debug statement. if it fails, we don't care!
+        }
         
         return this;
     }
