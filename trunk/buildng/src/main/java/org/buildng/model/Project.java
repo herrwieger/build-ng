@@ -14,9 +14,9 @@ public class Project {
     // instance variables
     // --------------------------------------------------------------------------
 
-    private String              fName;
-    private File                fBaseDir;
-    private Map<Phase, Builder> fBuildersByPhase;
+    private String                           fName;
+    private File                             fBaseDir;
+    private Map<TaskType, Builder>           fBuildersByTaskType;
 
     private List<Project>                    fProjectDependencies        = new ArrayList<Project>();
     private Map<LibraryScope, List<Library>> fLibraryDependenciesByScope = new HashMap<LibraryScope, List<Library>>();
@@ -27,11 +27,11 @@ public class Project {
     // constructors & factory methods
     // --------------------------------------------------------------------------
 
-    public Project(String pName, File pBasedir, Map<Phase, Builder> pBuildersByPhase) {
+    public Project(String pName, File pBasedir, Map<TaskType, Builder> pBuildersByTaskType) {
         fName    = pName;
         fBaseDir = pBasedir;
 
-        fBuildersByPhase = new HashMap<Phase, Builder>(pBuildersByPhase);
+        fBuildersByTaskType = new HashMap<TaskType, Builder>(pBuildersByTaskType);
     }
 
 
@@ -104,8 +104,12 @@ public class Project {
         return fName;
     }
 
-    public Builder getBuilderForPhase(Phase pPhase) {
-        return fBuildersByPhase.get(pPhase);
+    public Builder getBuilderForTaskType(TaskType pTaskType) {
+        return fBuildersByTaskType.get(pTaskType);
+    }
+    
+    public void putBuilderForTaskType(TaskType pTaskType, Builder pBuilder) {
+        fBuildersByTaskType.put(pTaskType, pBuilder);
     }
     
 

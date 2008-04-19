@@ -40,23 +40,23 @@ public class TestModel {
             new CompilerConfiguration("target/classes", "target/test-classes")
                     .sourceFolders("src/main/java")
                     .testSourceFolders("src/test/java");
-        fModel.putDefaultBuilderForPhase(new Cleaner("target"), Phase.CLEAN);
+        fModel.putDefaultBuilderForTaskType(new Cleaner("target"), TaskType.CLEAN);
         
         ResourceCopier copier =
             new ResourceCopier(compilerConfig)
                 .sourceFolders("src/main/resources")
                 .testSourceFolders("src/test/resources");
         Compiler compiler = new Compiler(compilerConfig);
-        fModel.putDefaultBuilderForPhase(new CompositeBuilder(copier, compiler), Phase.COMPILE);
+        fModel.putDefaultBuilderForTaskType(new CompositeBuilder(copier, compiler), TaskType.COMPILE);
         
-        fModel.putDefaultBuilderForPhase(new JunitTester(compilerConfig, "target/test"), Phase.TEST);
+        fModel.putDefaultBuilderForTaskType(new JunitTester(compilerConfig, "target/test"), TaskType.TEST);
         
-        fModel.putDefaultBuilderForPhase(new JarPackager(compilerConfig, "target"), Phase.PACKAGE);
+        fModel.putDefaultBuilderForTaskType(new JarPackager(compilerConfig, "target"), TaskType.PACKAGE);
         
         JavadocBuilder javadocBuilder = new JavadocBuilder(compilerConfig, "target/site/javadoc",
                                                 "target/site/testjavadoc");
         JunitReporter  junitReporter  = new JunitReporter("target/test", "target/site/test");
-        fModel.putDefaultBuilderForPhase(new CompositeBuilder(javadocBuilder, junitReporter), Phase.SITE);
+        fModel.putDefaultBuilderForTaskType(new CompositeBuilder(javadocBuilder, junitReporter), TaskType.SITE);
 
         
         Project applicationProject =
@@ -92,14 +92,14 @@ public class TestModel {
     public void testBuildProjectOrder() {
         Model            model            = createModel();
         TestOrderBuilder testOrderBuilder = new TestOrderBuilder();
-        model.putDefaultBuilderForPhase(testOrderBuilder, Phase.COMPILE);
+        model.putDefaultBuilderForTaskType(testOrderBuilder, TaskType.COMPILE);
         Project applicationProject = model.createProject("application");
         Project domainProject      = model.createProject("domain");
         Project moneyProject       = model.createProject("money");
         applicationProject.addDependency(domainProject);
         applicationProject.addDependency(moneyProject);
         
-        model.build(Phase.COMPILE);
+        model.build(TaskType.COMPILE);
         assertEquals(testOrderBuilder.getOrderedProjects().size(), 3);
         assertEquals(testOrderBuilder.getOrderedProjects().get(0), domainProject);
         assertEquals(testOrderBuilder.getOrderedProjects().get(1), moneyProject);
@@ -121,26 +121,26 @@ public class TestModel {
 
     
     public void testClean() {
-        fModel.build(Phase.CLEAN);
+        fModel.build(TaskType.CLEAN);
     }
     
     @Test(dependsOnMethods = {"testClean"})
     public void testCompile() {
-        fModel.build(Phase.COMPILE);
+        fModel.build(TaskType.COMPILE);
     }
 
     @Test(dependsOnMethods = {"testCompile"})
     public void testTest() {
-        fModel.build(Phase.TEST);
+        fModel.build(TaskType.TEST);
     }
     
     @Test(dependsOnMethods = {"testCompile"})
     public void testPackage() {
-        fModel.build(Phase.PACKAGE);
+        fModel.build(TaskType.PACKAGE);
     }
 
 
     public void testJavadoc() {
-        fModel.build(Phase.SITE);
+        fModel.build(TaskType.SITE);
     }
 }

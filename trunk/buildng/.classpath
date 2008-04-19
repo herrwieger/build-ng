@@ -5,9 +5,9 @@
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/elegant"/>
-	<classpathentry kind="lib" path="lib/apache/log4j/log4j-1.2.15.jar"/>
 	<classpathentry kind="lib" path="lib/org/apache/ant/ant/1.7.0/ant-1.7.0.jar"/>
-	<classpathentry kind="lib" path="lib/testng.org/testng/testng-5.4-jdk15.jar"/>
-	<classpathentry kind="lib" path="lib/apache/commons/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/org/testng/testng/5.4-jdk15/testng-5.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="lib/org/apache/commons/commons-lang/2.4/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/org/apache/log4j/log4j/1.2.15/log4j-1.2.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
