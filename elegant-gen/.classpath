@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/test/java"/>
-	<classpathentry kind="src" path="scrmain/resources"/>
+	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/buildng/lib/org/apache/ant/ant/1.7.0/ant-1.7.0.jar"/>
 	<classpathentry kind="lib" path="/buildng/lib/org/apache/commons/commons-lang/2.4/commons-lang-2.4.jar"/>
