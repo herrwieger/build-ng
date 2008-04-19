@@ -16,9 +16,8 @@ public class TestFluidGenerator {
     }
 
     public void testApplicableConstructor() {
-        FluidGenerator generator = new FluidGenerator();
-        assertFalse(generator.hasApplicableNoArgsConstructor(Mapper.class));
-        assertFalse(generator.hasApplicableNoArgsConstructor(NetCommand.class));
+        assertFalse(FluidGenerator.hasApplicableNoArgsConstructor(Mapper.class));
+        assertFalse(FluidGenerator.hasApplicableNoArgsConstructor(NetCommand.class));
    }
 
     public void testhasNoCorrespondingAddConfiguredMethod() {
