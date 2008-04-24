@@ -4,7 +4,7 @@
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>    
-		<property name="hibernate.current_session_context_class">org.buildng.flexmetrics.commons.hibernate.ExtendedThreadLocalSessionContext</property>
+		<property name="hibernate.current_session_context_class">org.buildng.commons.hibernate.ExtendedThreadLocalSessionContext</property>
 
 		<property name="show_sql">false</property>
 		<property name="format_sql">true</property>

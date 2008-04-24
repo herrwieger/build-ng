@@ -1,4 +1,4 @@
-package org.buildng.flexmetrics.commons.hibernate;
+package org.buildng.commons.hibernate;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;

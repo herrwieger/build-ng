@@ -5,15 +5,6 @@ import static org.testng.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.buildng.builders.Cleaner;
-import org.buildng.builders.Compiler;
-import org.buildng.builders.CompilerConfiguration;
-import org.buildng.builders.CompositeBuilder;
-import org.buildng.builders.JarPackager;
-import org.buildng.builders.JavadocBuilder;
-import org.buildng.builders.JunitReporter;
-import org.buildng.builders.JunitTester;
-import org.buildng.builders.ResourceCopier;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -24,7 +15,7 @@ public class TestModel {
     // instance variables
     // --------------------------------------------------------------------------
 
-    private Model            fModel;    
+    private Model            fModel;
 
     
 
@@ -36,29 +27,6 @@ public class TestModel {
     public void setUp() {
         fModel = createModel();
 
-        CompilerConfiguration compilerConfig =
-            new CompilerConfiguration("target/classes", "target/test-classes")
-                    .sourceFolders("src/main/java")
-                    .testSourceFolders("src/test/java");
-        fModel.putDefaultBuilderForTaskType(new Cleaner("target"), TaskType.CLEAN);
-        
-        ResourceCopier copier =
-            new ResourceCopier(compilerConfig)
-                .sourceFolders("src/main/resources")
-                .testSourceFolders("src/test/resources");
-        Compiler compiler = new Compiler(compilerConfig);
-        fModel.putDefaultBuilderForTaskType(new CompositeBuilder(copier, compiler), TaskType.COMPILE);
-        
-        fModel.putDefaultBuilderForTaskType(new JunitTester(compilerConfig, "target/test"), TaskType.TEST);
-        
-        fModel.putDefaultBuilderForTaskType(new JarPackager(compilerConfig, "target"), TaskType.PACKAGE);
-        
-        JavadocBuilder javadocBuilder = new JavadocBuilder(compilerConfig, "target/site/javadoc",
-                                                "target/site/testjavadoc");
-        JunitReporter  junitReporter  = new JunitReporter("target/test", "target/site/test");
-        fModel.putDefaultBuilderForTaskType(new CompositeBuilder(javadocBuilder, junitReporter), TaskType.SITE);
-
-        
         Project applicationProject =
             fModel.createProject("application")
                 .addDependency("junit", "junit", "4.4", LibraryScope.TEST);
@@ -83,10 +51,7 @@ public class TestModel {
     // --------------------------------------------------------------------------
 
     private Model createModel() {
-        Model model = new Model("C:/Work/Home/build_systems/trunk");
-        model.repositoryDir("C:/Library/Java");
-        
-        return model;
+        return Model.createStandardModel("C:/Work/Home/build_systems/trunk", "C:/Library/Java");
     }
 
     public void testBuildProjectOrder() {
