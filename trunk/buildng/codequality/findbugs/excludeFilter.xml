@@ -1,0 +1,13 @@
+<FindBugsFilter>
+	<Match> 
+      <Bug pattern="DLS_DEAD_LOCAL_STORE" />
+      <Method name="~[^$]*\$advice" />
+    </Match>
+    <Match>
+      <Bug pattern="UUF_UNUSED_FIELD,SE_TRANSIENT_FIELD_OF_NONSERIALIZABLE_CLASS" />
+      <Field name="~ajc\$.*" />
+    </Match>
+	<Match> 
+      <Bug pattern="EI_EXPOSE_REP, EI_EXPOSE_REP2" />
+    </Match>
+</FindBugsFilter>
