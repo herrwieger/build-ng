@@ -1,9 +1,8 @@
-package org.buildng.flexmetrics.imports.pmd;
+package org.buildng.builders;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.Date;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -21,24 +20,21 @@ import net.sourceforge.pmd.stat.Metric;
 
 import org.apache.log4j.Logger;
 import org.apache.tools.ant.DirectoryScanner;
+import org.buildng.commons.hibernate.HibernateUtil;
 import org.buildng.elegant.ElegantBuilder;
-import org.buildng.flexmetrics.commons.hibernate.HibernateUtil;
 import org.buildng.flexmetrics.domain.data.Audit;
 import org.buildng.flexmetrics.domain.javamm.MetaData;
 import org.buildng.flexmetrics.domain.javamm.SourceFile;
 import org.buildng.flexmetrics.domain.javamm.SourceFileMgr;
 import org.buildng.flexmetrics.domain.version.Version;
 import org.buildng.flexmetrics.domain.version.VersionMgr;
+import org.buildng.model.Builder;
+import org.buildng.model.Model;
+import org.buildng.model.Project;
 
 
 
-public class PMDImporter implements ReportListener {
-
-    // --------------------------------------------------------------------------
-    // constants
-    // --------------------------------------------------------------------------
-
-
+public class PMDImporter implements Builder, ReportListener {
 
     // --------------------------------------------------------------------------
     // class variables
@@ -58,22 +54,11 @@ public class PMDImporter implements ReportListener {
 
 
     // --------------------------------------------------------------------------
-    // class methods
-    // --------------------------------------------------------------------------
-
-    public static void main(String[] pArgs) {
-        new VersionMgr().create(new Date().toString());
-        new PMDImporter().run();
-    }
-
-
-
-    // --------------------------------------------------------------------------
     // instance methods
     // --------------------------------------------------------------------------
 
     @TransactionAttribute(value = TransactionAttributeType.REQUIRED)
-    private void run() {
+    public void build(Model pModel, Project pProject) {
                       fCurrentVersion = new VersionMgr().getCurrent();
         SourceFileMgr sourceFileMgr   = new SourceFileMgr();
         try {

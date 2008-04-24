@@ -4,7 +4,7 @@ package org.buildng.flexmetrics.domain.version;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
-import org.buildng.flexmetrics.commons.hibernate.HibernateUtil;
+import org.buildng.commons.hibernate.HibernateUtil;
 import org.hibernate.Query;
 
 

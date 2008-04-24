@@ -1,4 +1,4 @@
-package org.buildng.flexmetrics.commons.lang;
+package org.buildng.commons.lang;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -10,14 +10,6 @@ import java.util.Set;
  * @author TWIEGER
  */
 public class ReflectionUtil {
-    
-    /**
-     * private ctor: no instances.
-     */
-    private ReflectionUtil() {
-        
-    }
-
     /**
      * Liefert alle Interfaces die die übergebene Klasse und alle ihre Superklassen implementieren.
      * 

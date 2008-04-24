@@ -9,7 +9,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import org.apache.log4j.Logger;
-import org.buildng.flexmetrics.commons.hibernate.HibernateUtil;
+import org.buildng.commons.hibernate.HibernateUtil;
 import org.buildng.flexmetrics.domain.javamm.MetaClass;
 import org.buildng.flexmetrics.domain.javamm.MetaConstructor;
 import org.buildng.flexmetrics.domain.javamm.MetaField;
