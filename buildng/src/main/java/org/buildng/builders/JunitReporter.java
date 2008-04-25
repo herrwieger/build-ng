@@ -1,12 +1,12 @@
 package org.buildng.builders;
 
 import org.buildng.elegant.ElegantBuilder;
-import org.buildng.model.Builder;
 import org.buildng.model.Model;
 import org.buildng.model.Project;
+import org.buildng.model.Reporter;
 
 
-public class JunitReporter implements Builder {
+public class JunitReporter implements Reporter {
 
     // --------------------------------------------------------------------------
     // instance variables

@@ -45,15 +45,6 @@ public class HibernateUtil {
     //--------------------------------------------------------------------------
 
     /**
-     * Erlaubt es, eine SessionFactory festzulegen.
-     * {@see #getSessionFactory()} liefert dann die hier übergebene SessionFactory
-     * zurück.
-     */
-    public static void bindSessionFactory(SessionFactory pSessionFactory) {
-        sfSessionFactory = pSessionFactory;
-    }
-    
-    /**
      * Liefert eine SessionFactory zurück, die über eine AnnotationConfiguration
      * angelegt wurde. Alternativ kann mit {@see #bindSessionFactory(SessionFactory)}
      * eine alternative SessionFactory definiert werden, die dann hier

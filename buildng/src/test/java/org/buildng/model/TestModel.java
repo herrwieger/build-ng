@@ -3,8 +3,11 @@ package org.buildng.model;
 import static org.testng.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.buildng.defaults.Defaults;
+import org.buildng.flexmetrics.domain.version.VersionMgr;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -35,6 +38,7 @@ public class TestModel {
             fModel.createProject("domain")
                 .addDependency("junit", "junit", "3.8.1", LibraryScope.TEST)
                 .addDependency("commons-lang", "commons-lang", "2.3")
+                .addDependency("commons-collections", "commons-collections", "3.2")
                 .addDependency("log4j", "log4j", "1.2.14");
 
         Project moneyProject =
@@ -51,7 +55,7 @@ public class TestModel {
     // --------------------------------------------------------------------------
 
     private Model createModel() {
-        return Model.createStandardModel("C:/Work/Home/build_systems/trunk", "C:/Library/Java");
+        return Defaults.createDefaultModel("C:/Work/Home/build_systems/trunk", "C:/Library/Java");
     }
 
     public void testBuildProjectOrder() {
@@ -105,7 +109,8 @@ public class TestModel {
     }
 
 
-    public void testJavadoc() {
-        fModel.build(TaskType.SITE);
+    public void testReports() {
+        new VersionMgr().create("" + new Date());
+        fModel.build(TaskType.REPORTS);
     }
 }

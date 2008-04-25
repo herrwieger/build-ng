@@ -19,5 +19,5 @@ public enum TaskType {
 
     COMPILE, TEST, PACKAGE,
 
-    SITE,
+    REPORTS,
 }
