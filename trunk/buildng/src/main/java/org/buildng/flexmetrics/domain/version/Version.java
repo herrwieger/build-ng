@@ -4,12 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "XVERSION")
 public class Version {
-    //--------------------------------------------------------------------------  
+
+    // --------------------------------------------------------------------------
     // instance variables
-    //--------------------------------------------------------------------------
+    // --------------------------------------------------------------------------
 
     private int     fId;
     private String  fLabel;
@@ -18,11 +21,11 @@ public class Version {
      */
     private boolean fIsCurrent;
 
-    
-    
-    //--------------------------------------------------------------------------  
+
+
+    // --------------------------------------------------------------------------
     // Constructors
-    //--------------------------------------------------------------------------
+    // --------------------------------------------------------------------------
 
     Version() {
     }
@@ -33,15 +36,15 @@ public class Version {
      * @param pLabel
      */
     public Version(String pLabel) {
-        fLabel      = pLabel;
-        fIsCurrent  = true;
+        fLabel     = pLabel;
+        fIsCurrent = true;
     }
 
-    
 
-    //--------------------------------------------------------------------------  
+
+    // --------------------------------------------------------------------------
     // accessor methods
-    //--------------------------------------------------------------------------
+    // --------------------------------------------------------------------------
 
     @Id
     @GeneratedValue
@@ -61,12 +64,12 @@ public class Version {
         fLabel = pLabel;
     }
 
-    
+
     @Column(name = "CURRENT_FLAG")
     public boolean isCurrent() {
         return fIsCurrent;
     }
-    
+
     public void setCurrent(boolean pIsCurrent) {
         fIsCurrent = pIsCurrent;
     }

@@ -42,12 +42,7 @@ public aspect TransactionAspect {
         	}
         } catch(RuntimeException ex) {
         	if(innerTx!=null) {
-        		try {
-            		innerTx.rollback();
-        		}
-        		finally {
-            		currentSession.close();
-        		}
+                innerTx.rollback();
         	}
         	throw ex;
         }

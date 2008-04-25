@@ -1,4 +1,4 @@
-package org.buildng.builders;
+package org.buildng.reporters;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,19 +28,19 @@ import org.buildng.flexmetrics.domain.javamm.SourceFile;
 import org.buildng.flexmetrics.domain.javamm.SourceFileMgr;
 import org.buildng.flexmetrics.domain.version.Version;
 import org.buildng.flexmetrics.domain.version.VersionMgr;
-import org.buildng.model.Builder;
 import org.buildng.model.Model;
 import org.buildng.model.Project;
+import org.buildng.model.Reporter;
 
 
 
-public class PMDImporter implements Builder, ReportListener {
+public class PMDReporter implements Reporter, ReportListener {
 
     // --------------------------------------------------------------------------
     // class variables
     // --------------------------------------------------------------------------
 
-    private static final Logger LOG = Logger.getLogger(PMDImporter.class);
+    private static final Logger LOG = Logger.getLogger(PMDReporter.class);
 
 
 
@@ -76,13 +76,13 @@ public class PMDImporter implements Builder, ReportListener {
             InputStream rulesInput = new FileInputStream("../buildng/codequality/pmd/pmd.xml");
                         ruleset    = ruleSetFactory.createRuleSet(rulesInput);
 
-            ElegantBuilder   elegant = new ElegantBuilder(new File("."));
+            ElegantBuilder   elegant = new ElegantBuilder(pProject.getBaseDir());
             String           javaMainSourceDir = "src/main/java";
             DirectoryScanner scanner           = elegant.fileSet().dir(javaMainSourceDir).includes("**/*.java").get().getDirectoryScanner();
             scanner.scan();
             for (String fileName : scanner.getIncludedFiles()) {
                 LOG.debug("checking file " + fileName);
-                File file = new File(javaMainSourceDir + File.separator + fileName);
+                File file = new File(pProject.getBaseDir(), javaMainSourceDir + File.separator + fileName);
                 ruleContext.setSourceCodeFilename(fileName);
                 fCurrentSourceFile = sourceFileMgr.findByNameAndVersion(fileName, fCurrentVersion);
                 pmd.processFile(new FileInputStream(file), ruleset, ruleContext);
