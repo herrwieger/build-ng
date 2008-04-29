@@ -93,11 +93,9 @@ public class PMDReporter implements Reporter, ReportListener {
         }
     }
 
-    @Override
     public void metricAdded(Metric pMetric) {
     }
 
-    @Override
     public void ruleViolationAdded(IRuleViolation pRuleViolation) {
         LOG.debug("violation " + pRuleViolation);
         MetaData metaData = null;

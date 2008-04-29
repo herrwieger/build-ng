@@ -10,6 +10,6 @@
 	<classpathentry kind="lib" path="/buildng/lib/org/apache/ant/ant/1.7.0/ant-junit-1.7.0.jar"/>
 	<classpathentry kind="lib" path="/buildng/lib/org/apache/ant/ant/1.7.0/ant-nodeps-1.7.0.jar"/>
 	<classpathentry kind="lib" path="/buildng/lib/org/testng/testng/5.4-jdk15/testng-5.4-jdk15.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/org/aspectj/tools/1.6.0/aspectjtools.jar"/>
+	<classpathentry kind="lib" path="/buildng/lib/org/aspectj/aspectjtools/1.6.0/aspectjtools-1.6.0.jar"/>
 	<classpathentry kind="output" path="target-eclipse/classes"/>
 </classpath>

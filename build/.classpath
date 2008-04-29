@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/org/buildng/buildng/1.0/buildng-1.0.jar" sourcepath="/buildng"/>
-	<classpathentry kind="lib" path="lib/org/buildng/buildng/1.0/elegant-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/org/buildng/buildng/1.0/elegant-1.0.jar" sourcepath="/elegant"/>
 	<classpathentry kind="lib" path="lib/org/buildng/buildng/1.0/elegant-gen-1.0.jar" sourcepath="/elegant-gen"/>
 	<classpathentry kind="output" path="target-eclipse/classes"/>
 </classpath>
