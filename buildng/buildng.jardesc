@@ -11,8 +11,6 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <javaElement handleIdentifier="=buildng/src\/main\/resources"/>
-        <javaElement handleIdentifier="=buildng/src\/main\/java"/>
         <file path="/buildng/.project"/>
         <file path="/buildng/.classpath"/>
     </selectedElements>
