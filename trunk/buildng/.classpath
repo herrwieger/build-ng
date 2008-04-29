@@ -6,17 +6,17 @@
 	<classpathentry kind="lib" path="lib/org/apache/ant/ant/1.7.0/ant-1.7.0.jar" sourcepath="/ant"/>
 	<classpathentry kind="lib" path="lib/org/apache/commons/commons-lang/2.4/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/org/apache/log4j/log4j/1.2.15/log4j-1.2.15.jar"/>
-	<classpathentry kind="lib" path="lib/org/hibernate/3.2.6.GA/hibernate3.jar"/>
-	<classpathentry kind="lib" path="lib/org/hibernate/3.2.6.GA/jta.jar"/>
-	<classpathentry kind="lib" path="lib/org/hibernate/annotations/3.3.1.GA/ejb3-persistence.jar"/>
-	<classpathentry kind="lib" path="lib/org/hibernate/annotations/3.3.1.GA/hibernate-annotations.jar"/>
-	<classpathentry kind="lib" path="lib/org/hibernate/annotations/3.3.1.GA/hibernate-commons-annotations.jar"/>
-	<classpathentry kind="lib" path="lib/com/sun/jee/javaee-5.0.jar"/>
 	<classpathentry kind="lib" path="lib/net/sourceforge/pmd/4.2.1/pmd-4.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/org/testng/testng/5.4-jdk15/testng-5.4-jdk15.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/elegant"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/elegant-gen"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0"/>
 	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/com/sun/jta/1.0.1/jta-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/org/hibernate/hibernate/3.2.6.GA/hibernate-3.2.6.GA.jar"/>
+	<classpathentry kind="lib" path="lib/com/sun/ejb-persistence/3.0/ejb-persistence-3.0.jar"/>
+	<classpathentry kind="lib" path="lib/com/sun/jee/5.0/jee-5.0.jar"/>
+	<classpathentry kind="lib" path="lib/org/hibernate/hibernate-annotations/3.3.1.GA/hibernate-annotations-3.3.1.GA.jar"/>
+	<classpathentry kind="lib" path="lib/org/hibernate/hibernate-annotations/3.3.1.GA/hibernate-commons-annotations-3.3.1.GA.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

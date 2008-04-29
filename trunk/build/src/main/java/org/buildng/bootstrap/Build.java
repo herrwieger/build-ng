@@ -2,12 +2,15 @@ package org.buildng.bootstrap;
 
 import java.io.File;
 
+import org.buildng.builders.AspectJCompiler;
 import org.buildng.builders.Compiler;
 import org.buildng.builders.CompilerConfiguration;
 import org.buildng.builders.CompositeBuilder;
+import org.buildng.defaults.Defaults;
 import org.buildng.elegant.ElegantBuilder;
 import org.buildng.elegant.generator.FluidGenerator;
 import org.buildng.model.Builder;
+import org.buildng.model.LibraryScope;
 import org.buildng.model.Model;
 import org.buildng.model.Project;
 import org.buildng.model.TaskType;
@@ -30,7 +33,7 @@ public class Build {
      * @param args
      */
     public static void main(String[] args) {
-        Model   model          = Model.createStandardModel("..", "../buildng/lib");
+        Model   model          = Defaults.createDefaultModel("..", "../buildng/lib");
         
         Project elegantGenProject = model.createProject("elegant-gen")
         .addDependency("org.testng", "testng", "5.4-jdk15")
@@ -55,7 +58,8 @@ public class Build {
             .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-apache-oro")
             .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-jsch")
             .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-jmf")
-            .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-swing");
+            .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-swing")
+            .addDependency("org.aspectj", "aspectjtools", "1.6.0");
         
         final CompilerConfiguration compilerConf   = new CompilerConfiguration()
                 .sourceFolders("src/main/java", SRC_MAIN_JAVA_GEN)
@@ -72,13 +76,23 @@ public class Build {
         Compiler              compiler       = new Compiler(compilerConf);
         elegantProject.putBuilderForTaskType(TaskType.COMPILE, new CompositeBuilder(elegantGenerator, compiler));
 
-        model.createProject("buildng")
+        Project buildngProject = model.createProject("buildng")
             .addDependency(elegantProject)
-            .addDependency("org.testng", "testng", "5.4-jdk15")
+            .addDependency("org.aspectj", "aspectjrt", "1.6.0")
             .addDependency("org.apache.log4j", "log4j", "1.2.15")
             .addDependency("org.apache.commons", "commons-lang", "2.4")
-            .addDependency("org.apache.ant", "ant", "1.7.0");
-        
+            .addDependency("org.apache.ant", "ant", "1.7.0")
+            .addDependency("org.hibernate", "hibernate", "3.2.6.GA")
+            .addDependency("org.hibernate", "hibernate-annotations", "3.3.1.GA")
+            .addSecondaryDependency("org.hibernate", "hibernate-annotations", "3.3.1.GA", "hibernate-commmons-annotations")
+            .addDependency("com.sun", "jta", "1.0.1")
+            .addDependency("com.sun", "ejb-persistence", "3.0")
+            .addDependency("com.sun", "jee", "5.0")
+            .addDependency("net.sourceforge", "pmd", "4.2.1")
+            .addDependency("org.testng", "testng", "5.4-jdk15", LibraryScope.TEST);
+        AspectJCompiler              ajCompiler       = new AspectJCompiler(compilerConf);
+        buildngProject.putBuilderForTaskType(TaskType.COMPILE, ajCompiler);
+                
         model.build(TaskType.CLEAN, TaskType.COMPILE, TaskType.PACKAGE);
     }
 }
