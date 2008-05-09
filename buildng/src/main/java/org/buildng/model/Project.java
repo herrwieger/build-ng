@@ -47,59 +47,19 @@ public class Project {
     }
 
     
-    public Project addDependency(String pGroupId, String pName, String pVersion) {
-        addDependency(pGroupId, pName, pVersion, LibraryScope.COMPILE);
+    public Project addDependency(String pPath) {
+        addDependency(pPath, LibraryScope.COMPILE);
         
         return this;
     }
 
-    public Project addDependency(String pGroupId, String pName, String pVersion, String pExtension) {
-        addDependency(pGroupId, pName, pVersion, pExtension, LibraryScope.COMPILE);
-        
-        return this;
-    }
-
-    public Project addDependency(String pGroupId, String pName, String pVersion, LibraryScope pScope) {
-        addDependency(pGroupId, pName, pVersion, "jar", pScope);
-        
-        return this;
-    }
-
-    public Project addDependency(String pGroupId, String pName, String pVersion, String pExtension, LibraryScope pScope) {
+    public Project addDependency(String pPath, LibraryScope pScope) {
         List<Library> dependencies = getLibraryDependencies(pScope);
-        dependencies.add(new Library(pGroupId, pName, pVersion, pExtension));
+        Library library = new Library(pPath);
+        dependencies.add(library);
         
         return this;
     }
-
-    public Project addSecondaryDependency(String pGroupId, String pName, String pVersion, String pSecondaryName) {
-        addSecondaryDependency(pGroupId, pName, pVersion, pSecondaryName, LibraryScope.COMPILE);
-        
-        return this;
-    }
-    
-    public Project addSecondaryDependency(String pGroupId, String pName, String pVersion, String pSecondaryName, String pExtension) {
-        addSecondaryDependency(pGroupId, pName, pVersion, pSecondaryName, pExtension, LibraryScope.COMPILE);
-        
-        return this;
-    }
-    
-    private Project addSecondaryDependency(String pGroupId, String pName, String pVersion, String pSecondaryName,
-            LibraryScope pScope) {
-        addSecondaryDependency(pGroupId, pName, pVersion, pSecondaryName, "jar", pScope);        
-        
-        return this;
-    }
-    
-    private Project addSecondaryDependency(String pGroupId, String pName, String pVersion, String pSecondaryName,
-            String pExtension, LibraryScope pScope) {
-        
-        List<Library> dependencies = getLibraryDependencies(pScope);
-        dependencies.add(new Library(pGroupId, pName, pVersion, pSecondaryName, pExtension));
-        
-        return this;
-    }
-
 
     
     

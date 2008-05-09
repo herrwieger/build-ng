@@ -32,21 +32,21 @@ public class TestModel {
 
         Project applicationProject =
             fModel.createProject("application")
-                .addDependency("junit", "junit", "4.4", LibraryScope.TEST)
-                .addDependency("commons-lang", "commons-lang", "2.3", LibraryScope.RUNTIME)
-                .addDependency("commons-collections", "commons-collections", "3.2", LibraryScope.RUNTIME)
-                .addDependency("log4j", "log4j", "1.2.14", LibraryScope.RUNTIME);
+                .addDependency("junit-4.4.jar", LibraryScope.TEST)
+                .addDependency("commons-lang-2.3.jar", LibraryScope.RUNTIME)
+                .addDependency("commons-collections-3.2", LibraryScope.RUNTIME)
+                .addDependency("log4j-1.2.14", LibraryScope.RUNTIME);
 
         Project domainProject =
             fModel.createProject("domain")
-                .addDependency("junit", "junit", "3.8.1", LibraryScope.TEST)
-                .addDependency("commons-lang", "commons-lang", "2.3")
-                .addDependency("commons-collections", "commons-collections", "3.2")
-                .addDependency("log4j", "log4j", "1.2.14");
+                .addDependency("junit-3.8.1.jar", LibraryScope.TEST)
+                .addDependency("commons-lang-2.3.jar", LibraryScope.RUNTIME)
+                .addDependency("commons-collections-3.2", LibraryScope.RUNTIME)
+                .addDependency("log4j-1.2.14", LibraryScope.RUNTIME);
 
         Project moneyProject =
             fModel.createProject("money")
-                .addDependency("junit", "junit", "3.8.1", LibraryScope.TEST);
+                .addDependency("junit-3.8.1.jar", LibraryScope.TEST);
 
         applicationProject
             .addDependency(domainProject)
