@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.tools.ant.IntrospectionHelper;
+import org.apache.tools.ant.Task;
 
 
 /**
@@ -53,7 +54,7 @@ abstract class AbstractMethodVisitor {
             } else if (methodName.startsWith(CREATE_PREFIX) && !returnType.isArray() && !returnType.isPrimitive()
                     && numParameters == 0) {
 
-                if (needsABuilder(returnType)) {
+                if (isAntTaskOrType(returnType)) {
                     String fluidMethodName = getAddMethodName(FluidGenerator.getFluidMethodNameWithoutPrefix(method,
                                                      CREATE_PREFIX));
                     visitCreateMethod(method, fluidMethodName, returnType);
@@ -93,11 +94,21 @@ abstract class AbstractMethodVisitor {
     }
 
     static boolean needsABuilder(Class<?> pDataType) {
-//      String className = pDataType.getCanonicalName();
-//      return !(className.startsWith("java.lang") || className.startsWith("java.util") || pDataType.isPrimitive() || pDataType.isArray());
-      return (FluidGenerator.isAntTask(pDataType) || FluidGenerator.isAntType(pDataType)) && hasApplicableConstructor(pDataType);
+      return isAntTaskOrType(pDataType) && hasApplicableConstructor(pDataType);
   }
 
+    static boolean isAntTaskOrType(Class<?> pDataType) {
+        return (isAntTask(pDataType) || isAntType(pDataType));
+    }
+
+    static boolean isAntType(Class<?> pDataType) {
+        return !isAntTask(pDataType) && pDataType.getCanonicalName().startsWith("org.apache.tools.ant") && !pDataType.isInterface();
+    }
+
+    static boolean isAntTask(Class<?> pDataType) {
+        return Task.class.isAssignableFrom(pDataType) && !pDataType.isInterface();
+    }
+    
     static boolean hasApplicableConstructor(Class<?> pDataType) {
         return FluidGenerator.hasApplicableNoArgsConstructor(pDataType)
                 || FluidGenerator.hasApplicableProjectArgConstructor(pDataType);
