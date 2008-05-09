@@ -36,30 +36,30 @@ public class Build {
         Model   model          = Defaults.createDefaultModel("..", "../buildng/lib");
         
         Project elegantGenProject = model.createProject("elegant-gen")
-        .addDependency("org.testng", "testng", "5.4-jdk15")
-        .addDependency("org.apache.log4j", "log4j", "1.2.15")
-        .addDependency("org.apache.commons", "commons-lang", "2.4")
-        .addDependency("org.apache.ant", "ant", "1.7.0")
-        .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-nodeps")
-        .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-junit");
+        .addDependency("testng-5.4-jdk15.jar")
+        .addDependency("log4j-1.2.15.jar")
+        .addDependency("commons/commons-lang-2.4.jar")
+        .addDependency("ant/ant-1.7.0.jar")
+        .addDependency("ant/ant-nodeps-1.7.0.jar")
+        .addDependency("ant/ant-junit-1.7.0.jar");
 
         
         Project elegantProject = model.createProject("elegant")
             .addDependency(elegantGenProject)
-            .addDependency("org.testng", "testng", "5.4-jdk15")
-            .addDependency("org.apache.log4j", "log4j", "1.2.15")
-            .addDependency("org.apache.commons", "commons-lang", "2.4")
-            .addDependency("org.apache.ant", "ant", "1.7.0")
-            .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-antlr")
-            .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-nodeps")
-            .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-jdepend")
-            .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-commons-net")
-            .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-junit")
-            .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-apache-oro")
-            .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-jsch")
-            .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-jmf")
-            .addSecondaryDependency("org.apache.ant", "ant", "1.7.0", "ant-swing")
-            .addDependency("org.aspectj", "aspectjtools", "1.6.0");
+            .addDependency("testng-5.4-jdk15.jar")
+            .addDependency("log4j-1.2.15.jar")
+            .addDependency("commons/commons-lang-2.4.jar")
+            .addDependency("ant/ant-1.7.0.jar")
+            .addDependency("ant/ant-antlr-1.7.0.jar")
+            .addDependency("ant/ant-nodeps-1.7.0.jar")
+            .addDependency("ant/ant-jdepend-1.7.0.jar")
+            .addDependency("ant/ant-commons-net-1.7.0.jar")
+            .addDependency("ant/ant-junit-1.7.0.jar")
+            .addDependency("ant/ant-apache-oro-1.7.0.jar")
+            .addDependency("ant/ant-jsch-1.7.0.jar")
+            .addDependency("ant/ant-jmf-1.7.0.jar")
+            .addDependency("ant/ant-swing-1.7.0.jar")
+            .addDependency("aspectj/aspectjtools-1.6.0.jar");
         
         final CompilerConfiguration compilerConf   = new CompilerConfiguration()
                 .sourceFolders("src/main/java", SRC_MAIN_JAVA_GEN)
@@ -78,18 +78,18 @@ public class Build {
 
         Project buildngProject = model.createProject("buildng")
             .addDependency(elegantProject)
-            .addDependency("org.aspectj", "aspectjrt", "1.6.0")
-            .addDependency("org.apache.log4j", "log4j", "1.2.15")
-            .addDependency("org.apache.commons", "commons-lang", "2.4")
-            .addDependency("org.apache.ant", "ant", "1.7.0")
-            .addDependency("org.hibernate", "hibernate", "3.2.6.GA")
-            .addDependency("org.hibernate", "hibernate-annotations", "3.3.1.GA")
-            .addSecondaryDependency("org.hibernate", "hibernate-annotations", "3.3.1.GA", "hibernate-commmons-annotations")
-            .addDependency("com.sun", "jta", "1.0.1")
-            .addDependency("com.sun", "ejb-persistence", "3.0")
-            .addDependency("com.sun", "jee", "5.0")
-            .addDependency("net.sourceforge", "pmd", "4.2.1")
-            .addDependency("org.testng", "testng", "5.4-jdk15", LibraryScope.TEST);
+            .addDependency("aspectj/aspectjrt-1.6.0.jar")
+            .addDependency("log4j-1.2.15.jar")
+            .addDependency("commons/commons-lang-2.4.jar")
+            .addDependency("ant/ant-1.7.0.jar")
+            .addDependency("hibernate/hibernate-3.2.6.GA.jar")
+            .addDependency("hibernate-annotations/hibernate-annotations-3.3.1.GA.jar")
+            .addDependency("hibernate-annotations/hibernate-commmons-annotations-3.3.1.GA.jar")
+            .addDependency("jee/jta-1.0.1.jar")
+            .addDependency("jee/ejb-persistence-3.0.jar")
+            .addDependency("jee/jee-5.0.jar")
+            .addDependency("pmd/pmd-4.2.1.jar")
+            .addDependency("testng-5.4-jdk15.jar", LibraryScope.TEST);
         AspectJCompiler              ajCompiler       = new AspectJCompiler(compilerConf);
         buildngProject.putBuilderForTaskType(TaskType.COMPILE, ajCompiler);
                 
