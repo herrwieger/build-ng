@@ -32,7 +32,10 @@ public class TestModel {
 
         Project applicationProject =
             fModel.createProject("application")
-                .addDependency("junit", "junit", "4.4", LibraryScope.TEST);
+                .addDependency("junit", "junit", "4.4", LibraryScope.TEST)
+                .addDependency("commons-lang", "commons-lang", "2.3", LibraryScope.RUNTIME)
+                .addDependency("commons-collections", "commons-collections", "3.2", LibraryScope.RUNTIME)
+                .addDependency("log4j", "log4j", "1.2.14", LibraryScope.RUNTIME);
 
         Project domainProject =
             fModel.createProject("domain")
@@ -55,7 +58,7 @@ public class TestModel {
     // --------------------------------------------------------------------------
 
     private Model createModel() {
-        return Defaults.createDefaultModel("C:/Work/Home/build_systems/trunk", "C:/Library/Java");
+        return Defaults.createDefaultModel("../../trunk", "../../trunk/seu/buildng");
     }
 
     public void testBuildProjectOrder() {

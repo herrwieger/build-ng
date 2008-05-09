@@ -107,13 +107,6 @@ public class PMDReporter implements Reporter, ReportListener {
                               pRuleViolation.getRule().getPriorityName(), pRuleViolation.getDescription(),
                               fCurrentVersion);
         audit.setLine(pRuleViolation.getBeginLine());
-        HibernateUtil.getCurrentSession().save(audit);
-    }
-
-    public String equals() {
-        try {
-        } catch (Exception ex) {
-        }
-        return "equals";
+        HibernateUtil.save(audit);
     }
 }

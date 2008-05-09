@@ -42,7 +42,7 @@ public class JunitTester implements Builder {
 
         PathTypeBuilder classpath = BuilderUtil.createTestClasspath(elegant, pModel, pProject,
                                             fConfiguration.getTargetFolder(), fConfiguration.getTestTargetFolder(),
-                                            LibraryScope.COMPILE, LibraryScope.PROVIDED, LibraryScope.TEST);
+                                            LibraryScope.COMPILE, LibraryScope.RUNTIME, LibraryScope.PROVIDED, LibraryScope.TEST);
 
         for (String sourceFolder : fConfiguration.getTestSourceFolders()) {
             elegant.junit()

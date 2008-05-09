@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/main/java-gen"/>
-	<classpathentry kind="lib" path="/buildng/lib/org/apache/ant/ant/1.7.0/ant-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/buildng/lib/org/apache/ant/ant/1.7.0/ant-1.7.0.jar" sourcepath="C:/Work/TEW/build_systems/tools/apache-ant-1.7.0/src/main"/>
 	<classpathentry kind="lib" path="/buildng/lib/org/apache/ant/ant/1.7.0/ant-antlr-1.7.0.jar"/>
 	<classpathentry kind="lib" path="/buildng/lib/org/apache/ant/ant/1.7.0/ant-nodeps-1.7.0.jar"/>
 	<classpathentry kind="lib" path="/buildng/lib/org/apache/ant/ant/1.7.0/ant-jdepend-1.7.0.jar"/>

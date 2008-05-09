@@ -29,6 +29,6 @@ public class VersionMgr {
             currentVersion.setCurrent(false);
         }
         Version nextVersion = new Version(pLabel);
-        HibernateUtil.getCurrentSession().save(nextVersion);
+        HibernateUtil.save(nextVersion);
     }
 }
