@@ -12,8 +12,10 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.connection.pool_size">0</property>
 
-		<mapping class="org.buildng.flexmetrics.domain.version.Version" />
+		<mapping class="org.buildng.flexmetrics.domain.version.Version" />		
 		
+		<mapping class="org.buildng.flexmetrics.domain.project.Project" />
+
 		<mapping class="org.buildng.flexmetrics.domain.javamm.SourceFile" />
 		<mapping class="org.buildng.flexmetrics.domain.javamm.MetaPackage" />
 		<mapping class="org.buildng.flexmetrics.domain.javamm.MetaClass" />

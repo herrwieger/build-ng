@@ -5,8 +5,10 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.buildng.flexmetrics.domain.project.Project;
 import org.buildng.flexmetrics.domain.version.Version;
 
 
@@ -16,6 +18,7 @@ public class SourceFile extends AbstractVersionedMetaData {
     // instance variables
     //--------------------------------------------------------------------------
 
+	private Project			fProject;
     private Set<MetaClass>  fMetaClasses    = new HashSet<MetaClass>();
 
     
@@ -27,8 +30,10 @@ public class SourceFile extends AbstractVersionedMetaData {
     SourceFile() {
     }
     
-    public SourceFile(String pName, Version pVersion) {
+    public SourceFile(String pName, Project pProject, Version pVersion) {
         super(pName, pVersion);
+        
+        fProject = pProject;
     }
     
     
@@ -36,9 +41,19 @@ public class SourceFile extends AbstractVersionedMetaData {
     //--------------------------------------------------------------------------  
     // accessor methods
     //--------------------------------------------------------------------------
+    
+    @ManyToOne
+	public Project getProject() {
+		return fProject;
+	}
+    
+    void setProject(Project pProject)  {
+        fProject = pProject;
+    }
 
+	
     @OneToMany(cascade = CascadeType.ALL)
-    public Set<MetaClass> getMetaClasses() {
+    Set<MetaClass> getMetaClasses() {
         return fMetaClasses;
     }
 
@@ -50,6 +65,7 @@ public class SourceFile extends AbstractVersionedMetaData {
         fMetaClasses.add(pMetaClass);
     }
 
+    
     
     //--------------------------------------------------------------------------  
     // SourceFile methods

@@ -40,6 +40,7 @@ public class Defaults {
         JavadocBuilder javadocBuilder = new JavadocBuilder(compilerConfig, "target/reports/javadoc",
                                                 "target/reports/testjavadoc");
         JunitReporter  junitReporter  = new JunitReporter("target/test", "target/reports/test");
+        // TODO: introduce a subclass of JavadocBuilder or stategy for the javadoc method
         JavadocBuilder jmmReporter    = new JavadocBuilder(compilerConfig, "target/reports/javadoc",
                                                 "target/reports/testjavadoc");
         jmmReporter.doclet(JavaImporter.class);
