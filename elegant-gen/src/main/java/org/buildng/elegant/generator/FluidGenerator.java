@@ -16,7 +16,6 @@ import java.util.Map.Entry;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.tools.ant.Project;
-import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.DataType;
 
 public class FluidGenerator {
@@ -179,7 +178,7 @@ public class FluidGenerator {
             @Override
             void visitCreateMethod(Method pMethod, String pFluidMethodName, Class<?> pReturnType) {
                 String content;
-                if (isAntType(pReturnType)) {
+                if (AbstractMethodVisitor.isAntType(pReturnType)) {
                     content = "pBuilder.apply(fElement." + pMethod.getName() + "());\n";
                 } else {
                     content = "/*TODO*/";
@@ -278,7 +277,7 @@ public class FluidGenerator {
         Set<Class<?>> typesToBuild    = pDataTypes;
         do {
             for (Class<?> dataType : typesToBuild) {
-                if (AbstractMethodVisitor.needsABuilder(dataType) && isAntType(dataType)) {
+                if (AbstractMethodVisitor.isAntType(dataType)) {
                     createDataTypeBuilder(dataType, discoveredTypes, dir);
                     String builderClassName = getBuilderClassName(dataType);
                     String fluidMethodName  = StringUtils.uncapitalize(getBuilderClassPrefix(dataType));
@@ -297,14 +296,6 @@ public class FluidGenerator {
 
     static boolean isInConflictWithTaskCreationMethod(String fluidMethodName, Set<String> pBuilderMethodNames) {
         return pBuilderMethodNames.contains(fluidMethodName);
-    }
-
-    static boolean isAntTask(Class<?> pDataType) {
-        return Task.class.isAssignableFrom(pDataType) && !pDataType.isInterface();
-    }
-
-    static boolean isAntType(Class<?> pDataType) {
-        return !isAntTask(pDataType) && pDataType.getCanonicalName().startsWith("org.apache.tools.ant") && !pDataType.isInterface();
     }
 
     private void createDataTypeBuilder(Class<?> pDataType, Set<Class<?>> pDiscoveredTypes, File pDir)
@@ -488,7 +479,7 @@ public class FluidGenerator {
     }
 
     static String getBuilderClassName(Class<?> pClass) {
-        return getBuilderClassPrefix(pClass) + (isAntTask(pClass) ? TASK_BUILDER_SUFFIX : TYPE_BUILDER_SUFFIX);
+        return getBuilderClassPrefix(pClass) + (AbstractMethodVisitor.isAntTask(pClass) ? TASK_BUILDER_SUFFIX : TYPE_BUILDER_SUFFIX);
     }
 
     static String getBuilderClassPrefix(Class<?> pClass) {
