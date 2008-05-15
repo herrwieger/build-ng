@@ -32,21 +32,19 @@ public class TestModel {
 
         Project applicationProject =
             fModel.createProject("application")
-                .addDependency("junit-4.4.jar", LibraryScope.TEST)
-                .addDependency("commons-lang-2.3.jar", LibraryScope.RUNTIME)
-                .addDependency("commons-collections-3.2", LibraryScope.RUNTIME)
-                .addDependency("log4j-1.2.14", LibraryScope.RUNTIME);
+                .addDependency("junit/junit-4.4.jar", LibraryScope.TEST)
+                .addDependency("log4j-1.2.14.jar");
 
         Project domainProject =
             fModel.createProject("domain")
-                .addDependency("junit-3.8.1.jar", LibraryScope.TEST)
-                .addDependency("commons-lang-2.3.jar", LibraryScope.RUNTIME)
-                .addDependency("commons-collections-3.2", LibraryScope.RUNTIME)
-                .addDependency("log4j-1.2.14", LibraryScope.RUNTIME);
+                .addDependency("junit/junit-3.8.1.jar", LibraryScope.TEST)
+                .addDependency("commons/commons-lang-2.3.jar")
+                .addDependency("commons/commons-collections-3.2.jar")
+                .addDependency("log4j-1.2.14.jar");
 
         Project moneyProject =
             fModel.createProject("money")
-                .addDependency("junit-3.8.1.jar", LibraryScope.TEST);
+                .addDependency("junit/junit-3.8.1.jar", LibraryScope.TEST);
 
         applicationProject
             .addDependency(domainProject)
