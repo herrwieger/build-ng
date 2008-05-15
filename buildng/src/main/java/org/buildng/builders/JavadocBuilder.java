@@ -102,25 +102,25 @@ public class JavadocBuilder implements Builder {
     private PathTypeBuilder getBuildngRuntimePath() {
         ElegantBuilder elegant = new ElegantBuilder(new File("."));
         return elegant.path().add(elegant.path().location("bin")).add(
-                elegant.path().location("lib/org/apache/ant/ant/1.7.0/ant-launcher-1.7.0.jar")).add(
-                elegant.path().location("lib/org/apache/ant/ant/1.7.0/ant-1.7.0.jar")).add(
-                elegant.path().location("lib/org/apache/commons/commons-lang/2.4/commons-lang-2.4.jar")).add(
-                elegant.path().location("lib/org/apache/commons/commons-logging/1.0.4/commons-logging-1.0.4.jar")).add(
-                elegant.path().location("lib/org/apache/commons/commons-collections/2.1.1/commons-collections-2.1.1.jar")).add(
-                elegant.path().location("lib/org/apache/log4j/log4j/1.2.15/log4j-1.2.15.jar")).add(
-                elegant.path().location("lib/org/hibernate/hibernate/3.2.6.GA/antlr-2.7.6.jar")).add(
-                elegant.path().location("lib/org/hibernate/hibernate/3.2.6.GA/cglib-nodep-2.1_3.jar")).add(
-                elegant.path().location("lib/org/hibernate/hibernate/3.2.6.GA/dom4j-1.6.1.jar")).add(
-                elegant.path().location("lib/org/hibernate/hibernate/3.2.6.GA/ehcache-1.2.3.jar")).add(
-                elegant.path().location("lib/org/hibernate/hibernate/3.2.6.GA/hibernate-3.2.6.GA.jar")).add(
-                elegant.path().location("lib/org/hibernate/hibernate-annotations/3.3.1.GA/hibernate-annotations-3.3.1.GA.jar")).add(
-                elegant.path().location("lib/org/hibernate/hibernate-annotations/3.3.1.GA/hibernate-commons-annotations-3.3.1.GA.jar")).add(
-                elegant.path().location("lib/com/sun/ejb-persistence/3.0/ejb-persistence-3.0.jar")).add(
-                elegant.path().location("lib/com/sun/jee/5.0/jee-5.0.jar")).add(
-                elegant.path().location("lib/com/sun/jta/1.0.1/jta-1.0.1.jar")).add(
-                elegant.path().location("lib/net/sourceforge/pmd/4.2.1/pmd-4.2.1.jar")).add(
-                elegant.path().location("lib/org/testng/testng/5.4-jdk15/testng-5.4-jdk15.jar")).add(
+                elegant.path().location("lib/ant/ant-launcher-1.7.0.jar")).add(
+                elegant.path().location("lib/ant/ant-1.7.0.jar")).add(
+                elegant.path().location("lib/commons/commons-lang-2.4.jar")).add(
+                elegant.path().location("lib/commons/commons-logging-1.0.4.jar")).add(
+                elegant.path().location("lib/commons/commons-collections-2.1.1.jar")).add(
+                elegant.path().location("lib/log4j-1.2.15.jar")).add(
+                elegant.path().location("lib/hibernate/antlr-2.7.6.jar")).add(
+                elegant.path().location("lib/hibernate/cglib-nodep-2.1_3.jar")).add(
+                elegant.path().location("lib/hibernate/dom4j-1.6.1.jar")).add(
+                elegant.path().location("lib/hibernate/ehcache-1.2.3.jar")).add(
+                elegant.path().location("lib/hibernate/hibernate-3.2.6.GA.jar")).add(
+                elegant.path().location("lib/hibernate-annotations/hibernate-annotations-3.3.1.GA.jar")).add(
+                elegant.path().location("lib/hibernate-annotations/hibernate-commons-annotations-3.3.1.GA.jar")).add(
+                elegant.path().location("lib/jee/ejb-persistence-3.0.jar")).add(
+                elegant.path().location("lib/jee/jee-5.0.jar")).add(
+                elegant.path().location("lib/jee/jta-1.0.1.jar")).add(
+                elegant.path().location("lib/pmd/pmd-4.2.1.jar")).add(
+                elegant.path().location("lib/testng-5.4-jdk15.jar")).add(
                 elegant.path().location("C:/Apps/Java/jdk1.6.0/db/lib/derbyclient.jar")).add(
-                elegant.path().location("lib/org/aspectj/aspectjrt/1.6.0/aspectjrt-1.6.0.jar"));
+                elegant.path().location("lib/aspectj/aspectjrt-1.6.0.jar"));
     }
 }
