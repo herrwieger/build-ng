@@ -99,6 +99,7 @@ public class FluidGenerator {
                 writer.write("public " + builderName + " " + builderMethodName + "() {\n");
                 writer.write("    " + taskClass.getName() + " task = (" + taskClass.getName()
                         + ")getProject().createTask(\"" + taskName + "\");\n");
+                writer.write("    task.init();\n");
                 writer.write("    return new " + builderName + "(this, task);\n");
                 writer.write("}\n");
                 builderMethodNames.add(builderMethodName);
