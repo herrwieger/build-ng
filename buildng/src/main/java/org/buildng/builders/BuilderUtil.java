@@ -34,8 +34,9 @@ public class BuilderUtil {
     }
 
     public static void addTransitiveLibraryDependencies(ElegantBuilder pElegant, PathTypeBuilder pClasspath,
-            Model pModel, List<Project> pProjectDependencies, LibraryScope... pScopes) {
-        for (Project project : pProjectDependencies) {
+            Model pModel, Project pProject, LibraryScope... pScopes) {
+        for (Project project : pProject.getProjectDependencies()) {
+            addTransitiveLibraryDependencies(pElegant, pClasspath, pModel, project, pScopes);
             addLibraryDependenciesToClasspath(pElegant, pClasspath, pModel, project, pScopes);
         }
     }
