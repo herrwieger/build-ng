@@ -43,6 +43,8 @@ public class JunitTester implements Builder {
         PathTypeBuilder classpath = BuilderUtil.createTestClasspath(elegant, pModel, pProject,
                                             fConfiguration.getTargetFolder(), fConfiguration.getTestTargetFolder(),
                                             LibraryScope.COMPILE, LibraryScope.RUNTIME, LibraryScope.PROVIDED, LibraryScope.TEST);
+        BuilderUtil.addTransitiveLibraryDependencies(elegant, classpath, pModel, pProject.getProjectDependencies(),
+                LibraryScope.COMPILE, LibraryScope.RUNTIME, LibraryScope.PROVIDED, LibraryScope.TEST);
 
         for (String sourceFolder : fConfiguration.getTestSourceFolders()) {
             elegant.junit()
@@ -60,6 +62,7 @@ public class JunitTester implements Builder {
         return elegant.batchTest()
                 .haltonfailure(true)
                 .haltonerror(true)
+                .fork(true)
                 .todir(fTargetFolder)
                 .addFileSet(elegant.fileSet().dir(sourceFolder).includes("**/*Test.java"));
     }

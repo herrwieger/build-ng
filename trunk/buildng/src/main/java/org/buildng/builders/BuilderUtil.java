@@ -18,7 +18,7 @@ public class BuilderUtil {
             String pTargetFolder, String pTestTargetFolder, LibraryScope... pScopes) {
 
         PathTypeBuilder classpath = createClasspath(pElegant, pModel, pProject, pTargetFolder, pScopes);
-        addProjectDependenciesToClasspath(pElegant, classpath, pProject, pTestTargetFolder);
+        addTargetFoldersOfDependendProjectsToClasspath(pElegant, classpath, pProject.getProjectDependencies(), pTestTargetFolder);
         return classpath;
     }
 
@@ -27,19 +27,31 @@ public class BuilderUtil {
             String pTargetFolder, LibraryScope... pScopes) {
 
         PathTypeBuilder classpath = pElegant.path();
-        addProjectDependenciesToClasspath(pElegant, classpath, pProject, pTargetFolder);
-
-        List<Library> libraryDependencies = new ArrayList<Library>();
-        for (LibraryScope scope : pScopes) {
-            libraryDependencies.addAll(pProject.getLibraryDependencies(scope));
-        }
-        addLibraryDependenciesToClasspath(pElegant, classpath, pModel, libraryDependencies);
+        addTargetFoldersOfDependendProjectsToClasspath(pElegant, classpath, pProject.getProjectDependencies(), pTargetFolder);
+        addLibraryDependenciesToClasspath(pElegant, classpath, pModel, pProject, pScopes);
 
         return classpath;
     }
 
-    public static void addProjectDependenciesToClasspath(ElegantBuilder pElegant, PathTypeBuilder pPath, Project pProject, String pTargetFolder) {
-        for (Project project : pProject.getProjectDependencies()) {
+    public static void addTransitiveLibraryDependencies(ElegantBuilder pElegant, PathTypeBuilder pClasspath,
+            Model pModel, List<Project> pProjectDependencies, LibraryScope... pScopes) {
+        for (Project project : pProjectDependencies) {
+            addLibraryDependenciesToClasspath(pElegant, pClasspath, pModel, project, pScopes);
+        }
+    }
+
+    private static void addLibraryDependenciesToClasspath(ElegantBuilder pElegant, PathTypeBuilder pClasspath,
+            Model pModel, Project pProject, LibraryScope... pScopes) {
+        List<Library> libraryDependencies = new ArrayList<Library>();
+        for (LibraryScope scope : pScopes) {
+            libraryDependencies.addAll(pProject.getLibraryDependencies(scope));
+        }
+        addLibraryDependenciesToClasspath(pElegant, pClasspath, pModel, libraryDependencies);
+    }
+
+    public static void addTargetFoldersOfDependendProjectsToClasspath(ElegantBuilder pElegant, PathTypeBuilder pPath,
+            List<Project> pProjectDependencies, String pTargetFolder) {
+        for (Project project : pProjectDependencies) {
             pPath.add(pElegant.path().location(new File(project.getBaseDir(), pTargetFolder)));
         }
     }
