@@ -39,13 +39,13 @@ public abstract class AbstractCompiler implements Builder {
         BuilderUtil.createFolders(elegant, fConfiguration.getTestSourceFolders());
         BuilderUtil.createFolders(elegant, fConfiguration.getTargetFolder(), fConfiguration.getTestTargetFolder());
     
-        PathTypeBuilder classpath = BuilderUtil.createClasspath(elegant, pModel, pProject,
+        PathTypeBuilder classpath = BuilderUtil.createMainCompileClasspath(elegant, pModel, pProject,
                                             fConfiguration.getTargetFolder(), LibraryScope.COMPILE,
                                             LibraryScope.PROVIDED);
         compile(pModel, pProject, elegant, fConfiguration.getSourceFolders(), fConfiguration.getTargetFolder(),
                 classpath);
     
-                        classpath          = BuilderUtil.createClasspath(elegant, pModel, pProject,
+                        classpath          = BuilderUtil.createMainCompileClasspath(elegant, pModel, pProject,
                                                      fConfiguration.getTargetFolder(), LibraryScope.COMPILE,
                                                      LibraryScope.PROVIDED, LibraryScope.TEST);
         PathTypeBuilder projectClassesPath = elegant.path(fConfiguration.getTargetFolder());
