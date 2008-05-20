@@ -1,8 +1,7 @@
 package org.buildng.builders;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import org.buildng.elegant.ElegantBuilder;
 import org.buildng.elegant.type.PathTypeBuilder;
@@ -13,52 +12,58 @@ import org.buildng.model.Project;
 
 
 public class BuilderUtil {
-
-    public static PathTypeBuilder createTestClasspath(ElegantBuilder pElegant, Model pModel, Project pProject,
+    public static PathTypeBuilder createTestRuntimeClasspath(ElegantBuilder pElegant, Model pModel, Project pProject,
+            String pTargetFolder, String pTestTargetFolder, LibraryScope ... pScopes) {
+        
+        PathTypeBuilder classpath = createMainRuntimeClasspath(pElegant, pModel, pProject, pTargetFolder, pTestTargetFolder, pScopes);
+        addTargetFoldersOfDependendProjectsToClasspath(pElegant, classpath, pProject.getTransitiveProjectDependencies(), pTestTargetFolder);
+        
+        return classpath;
+    }
+    
+    public static PathTypeBuilder createMainRuntimeClasspath(ElegantBuilder pElegant, Model pModel, Project pProject,
+            String pTargetFolder, String pTestTargetFolder, LibraryScope ... pScopes) {
+        
+        PathTypeBuilder classpath = pElegant.path();
+        
+        addLibraryDependenciesToClasspath(pElegant, classpath, pModel,
+                pProject.getTransitiveLibraryDependencies(pScopes));
+        addTargetFoldersOfDependendProjectsToClasspath(pElegant, classpath, pProject.getTransitiveProjectDependencies(), pTargetFolder);
+        
+        return classpath;
+    }
+    
+    
+    public static PathTypeBuilder createTestCompileClasspath(ElegantBuilder pElegant, Model pModel, Project pProject,
             String pTargetFolder, String pTestTargetFolder, LibraryScope... pScopes) {
 
-        PathTypeBuilder classpath = createClasspath(pElegant, pModel, pProject, pTargetFolder, pScopes);
+        PathTypeBuilder classpath = createMainCompileClasspath(pElegant, pModel, pProject, pTargetFolder, pScopes);
         addTargetFoldersOfDependendProjectsToClasspath(pElegant, classpath, pProject.getProjectDependencies(), pTestTargetFolder);
         return classpath;
     }
 
 
-    public static PathTypeBuilder createClasspath(ElegantBuilder pElegant, Model pModel, Project pProject,
+    public static PathTypeBuilder createMainCompileClasspath(ElegantBuilder pElegant, Model pModel, Project pProject,
             String pTargetFolder, LibraryScope... pScopes) {
 
         PathTypeBuilder classpath = pElegant.path();
-        addTargetFoldersOfDependendProjectsToClasspath(pElegant, classpath, pProject.getProjectDependencies(), pTargetFolder);
-        addLibraryDependenciesToClasspath(pElegant, classpath, pModel, pProject, pScopes);
+        addTargetFoldersOfDependendProjectsToClasspath(pElegant, classpath, pProject.getProjectDependencies(),
+                pTargetFolder);
+        addLibraryDependenciesToClasspath(pElegant, classpath, pModel, pProject.getLibraryDependencies(pScopes));
 
         return classpath;
     }
 
-    public static void addTransitiveLibraryDependencies(ElegantBuilder pElegant, PathTypeBuilder pClasspath,
-            Model pModel, Project pProject, LibraryScope... pScopes) {
-        for (Project project : pProject.getProjectDependencies()) {
-            addTransitiveLibraryDependencies(pElegant, pClasspath, pModel, project, pScopes);
-            addLibraryDependenciesToClasspath(pElegant, pClasspath, pModel, project, pScopes);
-        }
-    }
-
-    private static void addLibraryDependenciesToClasspath(ElegantBuilder pElegant, PathTypeBuilder pClasspath,
-            Model pModel, Project pProject, LibraryScope... pScopes) {
-        List<Library> libraryDependencies = new ArrayList<Library>();
-        for (LibraryScope scope : pScopes) {
-            libraryDependencies.addAll(pProject.getLibraryDependencies(scope));
-        }
-        addLibraryDependenciesToClasspath(pElegant, pClasspath, pModel, libraryDependencies);
-    }
-
+    
     public static void addTargetFoldersOfDependendProjectsToClasspath(ElegantBuilder pElegant, PathTypeBuilder pPath,
-            List<Project> pProjectDependencies, String pTargetFolder) {
+            Collection<Project> pProjectDependencies, String pTargetFolder) {
         for (Project project : pProjectDependencies) {
             pPath.add(pElegant.path().location(new File(project.getBaseDir(), pTargetFolder)));
         }
     }
 
     public static void addLibraryDependenciesToClasspath(ElegantBuilder pElegant, PathTypeBuilder pPath, Model pModel,
-            List<Library> libraryDependencies) {
+            Collection<Library> libraryDependencies) {
         for (Library library : libraryDependencies) {
             pPath.add(pElegant.path().location(library.getFile(pModel.getRepositoryDir())));
         }

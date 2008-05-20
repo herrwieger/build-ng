@@ -63,12 +63,12 @@ public class JavadocBuilder implements Builder {
     public void build(Model pModel, Project pProject) {
         ElegantBuilder elegant = new ElegantBuilder(pProject.getBaseDir());
 
-        PathTypeBuilder classpath = BuilderUtil.createClasspath(elegant, pModel, pProject,
+        PathTypeBuilder classpath = BuilderUtil.createMainCompileClasspath(elegant, pModel, pProject,
                                             fConfiguration.getTargetFolder(), LibraryScope.COMPILE,
                                             LibraryScope.PROVIDED);
         javadoc(elegant, pProject.getName(), classpath, fConfiguration.getSourceFolders(), fTargetFolder);
 
-        classpath = BuilderUtil.createTestClasspath(elegant, pModel, pProject, fConfiguration.getTargetFolder(),
+        classpath = BuilderUtil.createTestCompileClasspath(elegant, pModel, pProject, fConfiguration.getTargetFolder(),
                             fConfiguration.getTestTargetFolder(), LibraryScope.COMPILE, LibraryScope.PROVIDED);
         javadoc(elegant, pProject.getName(), classpath, fConfiguration.getTestSourceFolders(), fTestTargetFolder);
     }

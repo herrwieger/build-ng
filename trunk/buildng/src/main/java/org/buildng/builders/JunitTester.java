@@ -40,17 +40,13 @@ public class JunitTester implements Builder {
 
         BuilderUtil.createFolders(elegant, fTargetFolder);
 
-        PathTypeBuilder classpath = BuilderUtil.createTestClasspath(elegant, pModel, pProject,
+        PathTypeBuilder classpath = BuilderUtil.createTestRuntimeClasspath(elegant, pModel, pProject,
                                             fConfiguration.getTargetFolder(), fConfiguration.getTestTargetFolder(),
                                             LibraryScope.COMPILE, LibraryScope.RUNTIME, LibraryScope.PROVIDED, LibraryScope.TEST);
-        BuilderUtil.addTransitiveLibraryDependencies(elegant, classpath, pModel, pProject,
-                LibraryScope.COMPILE, LibraryScope.RUNTIME, LibraryScope.PROVIDED, LibraryScope.TEST);
 
         for (String sourceFolder : fConfiguration.getTestSourceFolders()) {
             elegant.junit()
                 .addClasspath(classpath)
-                .addClasspath(elegant.path().location(fConfiguration.getTargetFolder()))
-                .addClasspath(elegant.path().location(fConfiguration.getTestTargetFolder()))
                 .addFormatter(elegant.formatterElement().type(elegant.formatterElementTypeAttribute().value("xml")))
                 .printsummary(elegant.jUnitTaskSummaryAttribute().value("true"))
                 .addBatchTest(batchTest(elegant, sourceFolder))
