@@ -1,4 +1,4 @@
-package org.buildng.bootstrap;
+
 
 import java.io.File;
 
@@ -35,17 +35,32 @@ public class Build {
     public static void main(String[] args) {
         Model   model          = Defaults.createDefaultModel("..", "../buildng/lib");
         
-        Project elegantGenProject = model.createProject("elegant-gen")
+        Project elegantGenProject = model.createProject("elegant-gen");
+        Project elegantProject = model.createProject("elegant");
+        Project buildngProject = model.createProject("buildng");
+        
+        setupElegantGenProject(model, elegantProject);
+        setupElegantGenProject(model, elegantGenProject);
+        setupBuildNgProject(model, buildngProject);
+                
+        model.build(TaskType.CLEAN, TaskType.COMPILE, TaskType.PACKAGE);
+    }
+    
+
+    public static void setupElegantGenProject(Project elegantGenProject) {
+        elegantGenProject
         .addDependency("testng-5.4-jdk15.jar")
         .addDependency("log4j-1.2.15.jar")
         .addDependency("commons/commons-lang-2.4.jar")
         .addDependency("ant/ant-1.7.0.jar")
         .addDependency("ant/ant-nodeps-1.7.0.jar")
         .addDependency("ant/ant-junit-1.7.0.jar");
-
-        
-        Project elegantProject = model.createProject("elegant")
-            .addDependency(elegantGenProject)
+    }
+    
+    
+    public static CompilerConfiguration setupElegantGenProject(Model pModel, Project elegantProject) {
+        elegantProject
+            .addDependency(pModel.getProject("elegant-gen"))
             .addDependency("testng-5.4-jdk15.jar")
             .addDependency("log4j-1.2.15.jar")
             .addDependency("commons/commons-lang-2.4.jar")
@@ -75,9 +90,13 @@ public class Build {
         };
         Compiler              compiler       = new Compiler(compilerConf);
         elegantProject.putBuilderForTaskType(TaskType.COMPILE, new CompositeBuilder(elegantGenerator, compiler));
+        return compilerConf;
+    }
 
-        Project buildngProject = model.createProject("buildng")
-            .addDependency(elegantProject)
+
+    public static void setupBuildNgProject(Model pModel, Project buildngProject) {
+        buildngProject
+            .addDependency(pModel.getProject("elegant"))
             .addDependency("aspectj/aspectjrt-1.6.0.jar")
             .addDependency("log4j-1.2.15.jar")
             .addDependency("commons/commons-lang-2.4.jar")
@@ -90,9 +109,11 @@ public class Build {
             .addDependency("jee/jee-5.0.jar")
             .addDependency("pmd/pmd-4.2.1.jar")
             .addDependency("testng-5.4-jdk15.jar", LibraryScope.TEST);
+        
+        final CompilerConfiguration compilerConf   = new CompilerConfiguration()
+        .sourceFolders("src/main/java", SRC_MAIN_JAVA_GEN)
+        .testSourceFolders("src/test/java");
         AspectJCompiler              ajCompiler       = new AspectJCompiler(compilerConf);
         buildngProject.putBuilderForTaskType(TaskType.COMPILE, ajCompiler);
-                
-        model.build(TaskType.CLEAN, TaskType.COMPILE, TaskType.PACKAGE);
     }
 }
