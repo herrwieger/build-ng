@@ -4,12 +4,12 @@
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/buildng/lib/ant/ant-1.7.0.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/ant/ant-junit-1.7.0.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/ant/ant-nodeps-1.7.0.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/commons/commons-lang-2.4.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/log4j-1.2.15.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/testng-5.4-jdk15.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/aspectj/aspectjtools-1.6.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/ant/ant-junit-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/ant/ant-nodeps-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/commons/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="/build/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="/build/lib/testng-5.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="/build/lib/aspectj/aspectjtools-1.6.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/ant/ant-1.7.0.jar"/>
 	<classpathentry kind="output" path="target-eclipse/classes"/>
 </classpath>

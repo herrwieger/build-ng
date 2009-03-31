@@ -4,20 +4,21 @@
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/main/java-gen"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0"/>
-	<classpathentry kind="lib" path="/buildng/lib/ant/ant-1.7.0.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/ant/ant-antlr-1.7.0.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/ant/ant-apache-oro-1.7.0.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/ant/ant-commons-net-1.7.0.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/ant/ant-jdepend-1.7.0.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/ant/ant-jmf-1.7.0.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/ant/ant-jsch-1.7.0.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/ant/ant-junit-1.7.0.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/ant/ant-nodeps-1.7.0.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/ant/ant-swing-1.7.0.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/commons/commons-lang-2.4.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/log4j-1.2.15.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/testng-5.4-jdk15.jar"/>
-	<classpathentry kind="lib" path="/buildng/lib/aspectj/aspectjtools-1.6.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/ant/ant-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/ant/ant-antlr-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/ant/ant-apache-oro-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/ant/ant-commons-net-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/ant/ant-jdepend-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/ant/ant-jmf-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/ant/ant-jsch-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/ant/ant-junit-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/ant/ant-nodeps-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/ant/ant-swing-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/build/lib/commons/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="/build/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="/build/lib/testng-5.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="/build/lib/aspectj/aspectjtools-1.6.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_12"/>
+	<classpathentry kind="lib" path="/build/lib/elegant-gen-1.0.jar"/>
 	<classpathentry kind="output" path="target-eclipse/classes"/>
 </classpath>
