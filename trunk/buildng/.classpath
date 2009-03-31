@@ -18,6 +18,5 @@
 	<classpathentry kind="lib" path="/build/lib/hibernate-annotations/hibernate-annotations-3.3.1.GA.jar"/>
 	<classpathentry kind="lib" path="/build/lib/hibernate-annotations/hibernate-commons-annotations-3.3.1.GA.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_12"/>
-	<classpathentry kind="lib" path="/build/lib/elegant-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

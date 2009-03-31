@@ -8,6 +8,7 @@ import org.buildng.builders.JarPackager;
 import org.buildng.builders.JavadocBuilder;
 import org.buildng.builders.JunitReporter;
 import org.buildng.builders.JunitTester;
+import org.buildng.builders.ReleaseCopier;
 import org.buildng.builders.ResourceCopier;
 import org.buildng.flexmetrics.imports.javamm.JavaImporter;
 import org.buildng.model.Model;
@@ -37,10 +38,12 @@ public class Defaults {
         
         model.putDefaultBuilderForTaskType(new JarPackager(compilerConfig, "target"), TaskType.PACKAGE);
         
+        model.putDefaultBuilderForTaskType(new ReleaseCopier("target", model.getRepositoryDir()), TaskType.RELEASE);
+        
         JavadocBuilder javadocBuilder = new JavadocBuilder(compilerConfig, "target/reports/javadoc",
                                                 "target/reports/testjavadoc");
         JunitReporter  junitReporter  = new JunitReporter("target/test", "target/reports/test");
-        // TODO: introduce a subclass of JavadocBuilder or stategy for the javadoc method
+        // TODO: introduce a subclass of JavadocBuilder or strategy for the javadoc method
         JavadocBuilder jmmReporter    = new JavadocBuilder(compilerConfig, "target/reports/javadoc",
                                                 "target/reports/testjavadoc");
         jmmReporter.doclet(JavaImporter.class);
