@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
 <jardesc>
-    <jar path="C:/Work/Home/build_systems/build-ng/elegant/elegant-1.0.jar"/>
+    <jar path="C:/Work/TEW/build-ng/build/lib/elegant-1.0.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/elegant/elegant.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
