@@ -2,9 +2,10 @@ package org.buildng.model;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -35,7 +36,7 @@ public class Model {
 
     private File                                  fBaseDir;
     private File                                  fRepositoryDir;
-    private Map<String, Project>                  fProjectsByName = new HashMap<String, Project>();
+    private List<Project>                         fProjects               = new ArrayList<Project>();
     
     private Map<TaskType, Builder>     fDefaultBuildersByTaskType = new HashMap<TaskType, Builder>();
 
@@ -74,20 +75,7 @@ public class Model {
 
     public Project createProject(String pName) {
         Project project = new Project(pName, new File(fBaseDir, pName), fDefaultBuildersByTaskType);
-        fProjectsByName.put(pName, project);
-        return project;
-    }
-    
-    /**
-     * @param pName
-     * @return
-     * @throws RuntimeException 
-     */
-    public Project getProject(String pName) {
-        Project project = fProjectsByName.get(pName);
-        if (project==null) {
-            throw new RuntimeException("Project with name=" + pName + " does not exist. Available projectnames are" + fProjectsByName.keySet());
-        }
+        fProjects.add(project);
         return project;
     }
 
@@ -117,10 +105,10 @@ public class Model {
 
     private void buildProjects(TaskType taskType) {
         Set<Project> visitedProjects = new HashSet<Project>();
-        buildProjects(taskType, visitedProjects, fProjectsByName.values());
+        buildProjects(taskType, visitedProjects, fProjects);
     }
 
-    private void buildProjects(TaskType pTaskType, Set<Project> pVisitedProjects, Collection<Project> pProjects) {
+    private void buildProjects(TaskType pTaskType, Set<Project> pVisitedProjects, List<Project> pProjects) {
         for (Project project : pProjects) {
             if (pVisitedProjects.contains(project)) {
                 continue;

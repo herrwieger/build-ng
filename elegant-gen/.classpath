@@ -9,7 +9,6 @@
 	<classpathentry kind="lib" path="/build/lib/commons/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="/build/lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="lib" path="/build/lib/testng-5.4-jdk15.jar"/>
-	<classpathentry kind="lib" path="/build/lib/aspectj/aspectjtools-1.6.0.jar"/>
 	<classpathentry kind="lib" path="/build/lib/ant/ant-1.7.0.jar"/>
 	<classpathentry kind="output" path="target-eclipse/classes"/>
 </classpath>

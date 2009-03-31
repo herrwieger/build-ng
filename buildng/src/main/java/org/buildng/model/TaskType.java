@@ -17,7 +17,7 @@ package org.buildng.model;
 public enum TaskType {
     CLEAN,
 
-    COMPILE, TEST, PACKAGE,
+    COMPILE, TEST, PACKAGE, RELEASE,
 
     REPORTS,
 }
