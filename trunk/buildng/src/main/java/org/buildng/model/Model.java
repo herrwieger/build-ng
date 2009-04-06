@@ -74,7 +74,13 @@ public class Model {
     }
 
     public Project createProject(String pName) {
-        Project project = new Project(pName, new File(fBaseDir, pName), fDefaultBuildersByTaskType);
+        File projectDir = new File(fBaseDir, pName);
+        return createProject(pName, projectDir);
+    }
+
+
+    public Project createProject(String pName, File pProjectDir) {
+        Project project = new Project(pName, pProjectDir, fDefaultBuildersByTaskType);
         fProjects.add(project);
         return project;
     }

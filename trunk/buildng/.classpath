@@ -6,7 +6,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/elegant"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/elegant-gen"/>
 	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
-	<classpathentry kind="lib" path="/build/lib/ant/ant-1.7.0.jar" sourcepath="/ant"/>
+	<classpathentry kind="lib" path="/build/lib/ant/ant-1.7.0.jar" sourcepath="C:/Library/Installations/developer/java/apache.org/ant/apache-ant-1.7.0-src/src/main"/>
 	<classpathentry kind="lib" path="/build/lib/commons/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="/build/lib/jee/ejb-persistence-3.0.jar"/>
 	<classpathentry kind="lib" path="/build/lib/jee/jee-5.0.jar"/>
@@ -17,6 +17,7 @@
 	<classpathentry kind="lib" path="/build/lib/hibernate/hibernate-3.2.6.GA.jar"/>
 	<classpathentry kind="lib" path="/build/lib/hibernate-annotations/hibernate-annotations-3.3.1.GA.jar"/>
 	<classpathentry kind="lib" path="/build/lib/hibernate-annotations/hibernate-commons-annotations-3.3.1.GA.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_12"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="JAVA_HOME/lib/tools.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

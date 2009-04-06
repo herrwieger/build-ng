@@ -51,19 +51,28 @@ public class Project {
 
     
     public Project addDependency(String pPath) {
-        addDependency(pPath, LibraryScope.COMPILE);
-        
-        return this;
+        return addDependency(pPath, LibraryScope.COMPILE);
     }
 
     public Project addDependency(String pPath, LibraryScope pScope) {
         List<Library> dependencies = getLibraryDependencies(pScope);
-        Library library = new Library(pPath);
+        RepositoryLibrary library = new RepositoryLibrary(pPath);
         dependencies.add(library);
         
         return this;
     }
 
+    public Project addExternalDependency(String pPath) {
+        return addExternalDependency(pPath, LibraryScope.COMPILE);
+    }
+    
+    public Project addExternalDependency(String pPath, LibraryScope pScope) {
+        List<Library> dependencies = getLibraryDependencies(pScope);
+        ExternalLibrary library = new ExternalLibrary(pPath);
+        dependencies.add(library);
+        
+        return this;
+    }
     
     
     //--------------------------------------------------------------------------  
@@ -139,7 +148,7 @@ public class Project {
         return fBuildersByTaskType.get(pTaskType);
     }
     
-    public void putBuilderForTaskType(TaskType pTaskType, Builder pBuilder) {
+    public void putBuilderForTaskType(Builder pBuilder, TaskType pTaskType) {
         fBuildersByTaskType.put(pTaskType, pBuilder);
     }
     

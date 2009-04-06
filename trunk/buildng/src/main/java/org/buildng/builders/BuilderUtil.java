@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.buildng.elegant.ElegantBuilder;
 import org.buildng.elegant.type.PathTypeBuilder;
 import org.buildng.model.Library;
+import org.buildng.model.RepositoryLibrary;
 import org.buildng.model.LibraryScope;
 import org.buildng.model.Model;
 import org.buildng.model.Project;
