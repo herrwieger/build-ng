@@ -17,34 +17,44 @@ import org.buildng.reporters.PMDReporter;
 
 
 public class Defaults {
+    //--------------------------------------------------------------------------  
+    // constants
+    //--------------------------------------------------------------------------
+
+    public static final CompilerConfiguration COMPILER_CONFIG =
+        new CompilerConfiguration()
+                .sourceFolders("src/main/java")
+                .testSourceFolders("src/test/java");
+
+    
+    
+    //--------------------------------------------------------------------------  
+    // class methods
+    //--------------------------------------------------------------------------
 
     public static Model createDefaultModel(String pBaseDir, String pRepositoryDir) {
         Model model = new Model(pBaseDir).repositoryDir(pRepositoryDir);
         
-        CompilerConfiguration compilerConfig =
-            new CompilerConfiguration("target/classes", "target/test-classes")
-                    .sourceFolders("src/main/java")
-                    .testSourceFolders("src/test/java");
         model.putDefaultBuilderForTaskType(new Cleaner("target"), TaskType.CLEAN);
         
         ResourceCopier copier =
-            new ResourceCopier(compilerConfig)
+            new ResourceCopier(COMPILER_CONFIG)
                 .sourceFolders("src/main/resources")
                 .testSourceFolders("src/test/resources");
-        Compiler compiler = new Compiler(compilerConfig);
+        Compiler compiler = new Compiler(COMPILER_CONFIG);
         model.putDefaultBuilderForTaskType(new CompositeBuilder(copier, compiler), TaskType.COMPILE);
         
-        model.putDefaultBuilderForTaskType(new JunitTester(compilerConfig, "target/test"), TaskType.TEST);
+        model.putDefaultBuilderForTaskType(new JunitTester(COMPILER_CONFIG, "target/test"), TaskType.TEST);
         
-        model.putDefaultBuilderForTaskType(new JarPackager(compilerConfig, "target"), TaskType.PACKAGE);
+        model.putDefaultBuilderForTaskType(new JarPackager(COMPILER_CONFIG, "target"), TaskType.PACKAGE);
         
         model.putDefaultBuilderForTaskType(new ReleaseCopier("target", model.getRepositoryDir()), TaskType.RELEASE);
         
-        JavadocBuilder javadocBuilder = new JavadocBuilder(compilerConfig, "target/reports/javadoc",
+        JavadocBuilder javadocBuilder = new JavadocBuilder(COMPILER_CONFIG, "target/reports/javadoc",
                                                 "target/reports/testjavadoc");
         JunitReporter  junitReporter  = new JunitReporter("target/test", "target/reports/test");
         // TODO: introduce a subclass of JavadocBuilder or strategy for the javadoc method
-        JavadocBuilder jmmReporter    = new JavadocBuilder(compilerConfig, "target/reports/javadoc",
+        JavadocBuilder jmmReporter    = new JavadocBuilder(COMPILER_CONFIG, "target/reports/javadoc",
                                                 "target/reports/testjavadoc");
         jmmReporter.doclet(JavaImporter.class);
         PMDReporter    pmdReporter    = new PMDReporter();

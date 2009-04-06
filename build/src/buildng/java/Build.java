@@ -96,7 +96,7 @@ public class Build {
             }
         };
         Compiler              compiler       = new Compiler(compilerConf);
-        elegantProject.putBuilderForTaskType(TaskType.COMPILE, new CompositeBuilder(elegantGenerator, compiler));
+        elegantProject.putBuilderForTaskType(new CompositeBuilder(elegantGenerator, compiler), TaskType.COMPILE);
         
         buildngProject
             .addDependency(elegantProject)
@@ -111,9 +111,10 @@ public class Build {
             .addDependency("jee/ejb-persistence-3.0.jar")
             .addDependency("jee/jee-5.0.jar")
             .addDependency("pmd/pmd-4.2.1.jar")
-            .addDependency("testng-5.4-jdk15.jar", LibraryScope.TEST);        
+            .addDependency("testng-5.4-jdk15.jar", LibraryScope.TEST)        
+            .addExternalDependency(System.getenv("JAVA_HOME") + "/lib/tools.jar");
         AspectJCompiler              ajCompiler       = new AspectJCompiler(compilerConf);
-        buildngProject.putBuilderForTaskType(TaskType.COMPILE, ajCompiler);
+        buildngProject.putBuilderForTaskType(ajCompiler, TaskType.COMPILE);
                 
         model.build(TaskType.CLEAN, TaskType.COMPILE, TaskType.PACKAGE, TaskType.RELEASE);
     }

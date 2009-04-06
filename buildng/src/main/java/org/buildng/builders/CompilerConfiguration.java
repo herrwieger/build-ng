@@ -11,9 +11,9 @@ public class CompilerConfiguration implements Configuration {
     // --------------------------------------------------------------------------
 
     private String   fTargetFolder;
-    private String[] fSourceFolders;
-    private String[] fTestSourceFolders;
-    private String   fTestTargetFolder;
+    private String[] fSourceFolders     = new String[0];
+    private String[] fTestSourceFolders = new String[0];
+    private String   fTestTargetFolder  = "";
 
 
 
@@ -57,8 +57,17 @@ public class CompilerConfiguration implements Configuration {
         return fSourceFolders;
     }
 
+    public boolean hasSourceFolders() {
+        return fSourceFolders.length > 0;
+    }
+
+    
     public String[] getTestSourceFolders() {
         return fTestSourceFolders;
+    }
+
+    public boolean hasTestSourceFolders() {
+        return fTestSourceFolders.length > 0;
     }
 
     public String getTargetFolder() {
