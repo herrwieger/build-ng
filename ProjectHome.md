@@ -1,0 +1,2 @@
+BuildNG is a programmatic build tool using plain old java. No more XML!
+It provides a concise and powerful programming infrastructure for developing software builds. Its inspired by some of the concepts of Maven 2. Its leveraging ant for the common build tasks by introducing a programmatic fluent interface on top of ant (elegAnt).
